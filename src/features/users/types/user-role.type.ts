@@ -1,0 +1,1 @@
+export type UserRole = 'ADMIN' | 'EDITOR' | 'DISCOUNT_MANAGER' | 'EVENT_MANAGER' | 'USER';
