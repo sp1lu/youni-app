@@ -7,10 +7,11 @@ import { auth } from '../../../global/services'
 import { loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout } from '../services'
 
 /** Types */
-import type { User } from '../../users'
+import { getUserById, userConverter, type User } from '../../users'
 
 interface AuthContextValue {
     user: User | null,
+    baseUser: Pick<User, 'id' | 'email'> | null,
     loading: boolean,
     loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     signInWithGoogle: () => void,
@@ -21,6 +22,7 @@ interface AuthContextValue {
 /** Provider */
 export const AuthContext = createContext<AuthContextValue>({
     user: null,
+    baseUser: null,
     loading: true,
     loginWithEmailAndPassword: async () => { },
     signInWithGoogle: async () => { },
@@ -30,12 +32,16 @@ export const AuthContext = createContext<AuthContextValue>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [baseUser, setBaseUser] = useState<Pick<User, 'id' | 'email'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
             if (firebaseUser) {
-                console.log(firebaseUser);
+                setBaseUser({ id: firebaseUser.uid, email: firebaseUser.email ?? '' });
+                getUserById<User | null>(firebaseUser.uid, 'appUsers', userConverter)
+                    .then((user: User | null) => user ? setUser(user) : setUser(null))
+                    .finally(() => setLoading(false))
             } else {
                 setUser(null);
                 setLoading(false);
@@ -46,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, loading, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
+        <AuthContext.Provider value={{ user, baseUser, loading, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
             {children}
         </AuthContext.Provider>
     )

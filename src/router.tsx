@@ -1,9 +1,14 @@
 /** Dependencies */
 import { createBrowserRouter, type DataRouter } from 'react-router'
 
+/** Services */
+import { getAllCities } from './features/users/services'
+
 /** Components */
 import App from './App'
-import { LandingPage } from './pages'
+
+/** Pages */
+import { LandingPage, SignupPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -11,7 +16,16 @@ export const router: DataRouter = createBrowserRouter([
         path: '/',
         element: <App />,
         children: [
-            { path: 'landing', element: <LandingPage /> }
+            { path: 'landing', element: <LandingPage /> },
+            {
+                path: 'signup',
+                element: <SignupPage />,
+                loader: async () => {
+                    return {
+                        cities: await getAllCities()
+                    }
+                }
+            }
         ]
     }
 ]);
