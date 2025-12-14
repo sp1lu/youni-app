@@ -1,5 +1,6 @@
 /** Dependencies */
 import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { Link } from 'react-router'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
@@ -62,6 +63,8 @@ function LandingPage() {
                 <button type='button' onClick={loginWithGoogle}>Continua con Google</button>
                 <button type='button' onClick={loginWithApple}>Continua con Apple</button>
             </div>
+
+            <p>Hai già un account? <Link to='/signin'>Allora accedi!</Link></p>
         </div>
     )
 }
