@@ -1,0 +1,41 @@
+@mixin pulse-shadow--success {
+    @keyframes pulse-success {
+        0% {
+            -moz-box-shadow: 0 0 0 0 rgba(green, 0.8);
+            box-shadow: 0 0 0 0 rgba(green, 0.8);
+        }
+
+        70% {
+            -moz-box-shadow: 0 0 0 16px rgba(green, 0);
+            box-shadow: 0 0 0 16px rgba(green, 0);
+        }
+
+        100% {
+            -moz-box-shadow: 0 0 0 0 rgba(green, 0);
+            box-shadow: 0 0 0 0 rgba(green, 0);
+        }
+    }
+
+    animation: pulse-success 2s infinite;
+}
+
+@mixin pulse-shadow--error {
+    @keyframes pulse-error {
+        0% {
+            -moz-box-shadow: 0 0 0 0 rgba(red, 0.8);
+            box-shadow: 0 0 0 0 rgba(red, 0.8);
+        }
+
+        70% {
+            -moz-box-shadow: 0 0 0 16px rgba(red, 0);
+            box-shadow: 0 0 0 16px rgba(red, 0);
+        }
+
+        100% {
+            -moz-box-shadow: 0 0 0 0 rgba(red, 0);
+            box-shadow: 0 0 0 0 rgba(red, 0);
+        }
+    }
+
+    animation: pulse-error 2s infinite;
+}

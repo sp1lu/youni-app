@@ -7,22 +7,22 @@ import { auth } from '../../../global/services'
 
 /** Functions */
 export const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
             console.log('Nuovo utente creato con email e password:', userCredential.user);
         })
-        .catch((error: any) => {
-            console.log(`Errore nell'effettuare il login con email e password`, error);
+        .catch((error: any) => {          
+            throw new Error(error instanceof Error ? error.message : `Errore nella creazione dell'utente.`);
         })
 }
 
 export const loginWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
             console.log('Utente loggato con email e password:', userCredential.user);
         })
         .catch((error: any) => {
-            console.log(`Errore nell'effettuare il login con email e password`, error);
+            throw new Error(error instanceof Error ? error.message : `Errore nell'effettuare il login.`);
         })
 }
 
@@ -48,8 +48,8 @@ export const signInWithApple = async (): Promise<void> => {
     }
 }
 
-export const logout = (): void => {
-    signOut(auth)
+export const logout = async (): Promise<void> => {
+    return signOut(auth)
         .then(() => {
             console.log('Log out effettuato correttamente');
         })

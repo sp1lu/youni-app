@@ -1,6 +1,6 @@
 /** Dependencies */
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 /** Contexts */
 import { useSnackbars } from '../../features/snackbars'
@@ -9,6 +9,9 @@ import { useSnackbars } from '../../features/snackbars'
 import { useAuth } from '../../features/auth'
 
 function SigninPage() {
+    /** Navigate */
+    const navigate = useNavigate();
+
     /** Contexts */
     const { loginWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
     const { createSnackbar } = useSnackbars();
@@ -36,6 +39,7 @@ function SigninPage() {
         ) return;
 
         loginWithEmailAndPassword(formData.email, formData.password)
+            .then(() => navigate('/'))
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nel login.`, 'ERROR'))
     }
 

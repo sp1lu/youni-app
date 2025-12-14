@@ -1,5 +1,6 @@
 /** Dependencies */
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { useNavigate } from 'react-router'
 
 /** Models */
 import { appUserConverter, type AppUser, type City, type User } from '../../features/users'
@@ -13,6 +14,9 @@ import { useSnackbars } from '../../features/snackbars'
 
 /** Component */
 function SignupPage() {
+    /** Navigate */
+    const navigate = useNavigate();
+
     /** Contexts */
     const { baseUser } = useAuth();
     const { createSnackbar } = useSnackbars();
@@ -66,7 +70,7 @@ function SignupPage() {
         };
 
         addUser(user, 'appUsers', appUserConverter)
-            .then(() => '')
+            .then(() => navigate('/'))
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione dell'utente.`, 'ERROR'))
     }
 

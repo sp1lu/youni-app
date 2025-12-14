@@ -1,6 +1,6 @@
 /** Dependencies */
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
@@ -14,17 +14,21 @@ interface LoginFormData {
 
 /** Component */
 function LandingPage() {
-    /** State */
-    const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
+    /** Navigate */
+    const navigate = useNavigate();
 
     /** Contexts */
     const { createAccountWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
     const { createSnackbar } = useSnackbars();
 
+    /** State */
+    const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
+
     /** Methods */
     const onFormSubmit = (event: FormEvent) => {
         event.preventDefault();
         createAccountWithEmailAndPassword(formData.email, formData.password)
+            .then(() => navigate('/signup'))
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione dell'utente.`, 'ERROR'))
     }
 
