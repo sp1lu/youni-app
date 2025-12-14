@@ -1,5 +1,5 @@
 /** Dependencies */
-import { Outlet } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 
 /** Services */
 import { useAuth } from './features/auth'
@@ -11,10 +11,15 @@ import './App.scss'
 function App() {
 
   const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    logout().then(() => navigate('/landing'))
+  }
 
   return (
     <>
-      <button type="button" onClick={logout}>LOGOUT</button>
+      <button type="button" onClick={onLogout}>LOGOUT</button>
       <Outlet />
     </>
   )

@@ -20,15 +20,12 @@ function ProtectedRoute(props: ProtectedRouteProps) {
 
     /** Effects */
     useEffect(() => {
-        console.log('BASE USER', baseUser);
-        console.log('USER', user);
-        
-        if (!loading) {
-            if (!baseUser) navigate('/landing')
-            else if (baseUser && !user) navigate('/signup')
-            else if (user && allowedRoles && !allowedRoles.includes(user.role)) navigate('/')
-        }
-    }, [baseUser, user, loading, navigate]);
+        if (loading) return;
+
+        if (!baseUser) navigate('/landing')
+        else if (!user) navigate('/signup')
+        else if (allowedRoles && !allowedRoles.includes(user.role)) navigate('/')
+    }, [baseUser, user, loading]);
 
     if (loading) return (
         <div className='protected-route'>

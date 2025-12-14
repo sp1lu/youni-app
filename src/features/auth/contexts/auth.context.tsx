@@ -15,9 +15,9 @@ interface AuthContextValue {
     loading: boolean,
     createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
-    signInWithGoogle: () => void,
-    signInWithApple: () => void,
-    logout: () => void
+    signInWithGoogle: () => Promise<void>,
+    signInWithApple: () => Promise<void>,
+    logout: () => Promise<void>
 }
 
 /** Provider */
@@ -29,7 +29,7 @@ export const AuthContext = createContext<AuthContextValue>({
     loginWithEmailAndPassword: async () => { },
     signInWithGoogle: async () => { },
     signInWithApple: async () => { },
-    logout: () => { }
+    logout: async () => { }
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -39,15 +39,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
-            if (firebaseUser) {
-                setBaseUser({ id: firebaseUser.uid, email: firebaseUser.email ?? '' });
-                getUserById<User | null>(firebaseUser.uid, 'appUsers', userConverter)
-                    .then((user: User | null) => user ? setUser(user) : setUser(null))
-                    .finally(() => setLoading(false))
-            } else {
+            setLoading(true);
+
+            if (!firebaseUser) {
+                setBaseUser(null);
                 setUser(null);
                 setLoading(false);
+                return;
             }
+
+            setBaseUser({ id: firebaseUser.uid, email: firebaseUser.email ?? '' });
+
+            getUserById<User | null>(firebaseUser.uid, 'appUsers', userConverter)
+                .then((appUser: User | null) => setUser(appUser))
+                .finally(() => setLoading(false))
         });
 
         return unsubscribe;
