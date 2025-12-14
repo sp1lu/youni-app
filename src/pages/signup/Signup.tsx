@@ -9,11 +9,13 @@ import { addUser, getAllCities, getUserById } from '../../features/users/service
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
+import { useSnackbars } from '../../features/snackbars'
 
 /** Component */
 function SignupPage() {
     /** Contexts */
     const { baseUser } = useAuth();
+    const { createSnackbar } = useSnackbars();
 
     /** State */
     const [formData, setFormData] = useState<Record<string, string>>({});
@@ -26,6 +28,7 @@ function SignupPage() {
                 setCities([...cities]);
                 setFormData((prevValue) => ({ ...prevValue, city: cities[0].id }))
             })
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nel recupero dei dati del form.`, 'ERROR'))
     }, []);
 
     /** Methods */
@@ -64,7 +67,7 @@ function SignupPage() {
 
         addUser(user, 'appUsers', appUserConverter)
             .then(() => '')
-            .catch((err: unknown) => '')
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione dell'utente.`, 'ERROR'))
     }
 
     /** Node */

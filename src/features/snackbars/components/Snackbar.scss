@@ -1,0 +1,58 @@
+@use '@styles/index' as *;
+
+.snackbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--neutral-100, white);
+    background-color: var(--neutral-800, black);
+    min-height: 56px;
+    padding: 16px;
+    border-radius: var(--border-radius-m, 8px);
+}
+
+.snackbar__icon {
+    border-radius: 100%;
+}
+
+.snackbar__icon,
+.snackbar__btn {
+    width: 24px;
+    height: 24px;
+}
+
+.snackbar__icon--success {
+    color: var(--neutral-100, white);
+    background-color: green;
+    @include pulse-shadow--success;
+}
+
+.snackbar__icon--error {
+    color: var(--neutral-100, white);
+    background-color: red;
+    @include pulse-shadow--error;
+}
+
+.snackbar__text {
+    margin: 0;
+    flex: 1;
+}
+
+.snackbar__icon span,
+.snackbar__btn span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.snackbar__btn {
+    color: var(--neutral-600, lightgrey);
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        color: var(--neutral-500, white);
+    }
+}

@@ -2,12 +2,16 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { Link } from 'react-router'
 
+/** Contexts */
+import { useSnackbars } from '../../features/snackbars'
+
 /** Services */
-import { useAuth } from '../../features/auth';
+import { useAuth } from '../../features/auth'
 
 function SigninPage() {
     /** Contexts */
     const { loginWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
+    const { createSnackbar } = useSnackbars();
 
     /** State */
     const [formData, setFormData] = useState<Record<string, string>>({});
@@ -31,7 +35,8 @@ function SigninPage() {
             !('password' in formData)
         ) return;
 
-        loginWithEmailAndPassword(formData.email, formData.password);
+        loginWithEmailAndPassword(formData.email, formData.password)
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nel login.`, 'ERROR'))
     }
 
     const loginWithGoogle = () => {

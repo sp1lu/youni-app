@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
+import { useSnackbars } from '../../features/snackbars'
 
 /** Interfaces */
 interface LoginFormData {
@@ -18,11 +19,13 @@ function LandingPage() {
 
     /** Contexts */
     const { createAccountWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
+    const { createSnackbar } = useSnackbars();
 
     /** Methods */
     const onFormSubmit = (event: FormEvent) => {
         event.preventDefault();
-        createAccountWithEmailAndPassword(formData.email, formData.password);
+        createAccountWithEmailAndPassword(formData.email, formData.password)
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione dell'utente.`, 'ERROR'))
     }
 
     const loginWithGoogle = () => {
