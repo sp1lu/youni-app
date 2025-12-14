@@ -14,12 +14,12 @@ function LandingPage() {
     const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
 
     /** Contexts */
-    const { loginWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
+    const { createAccountWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
 
     /** Methods */
     const onFormSubmit = (event: FormEvent) => {
         event.preventDefault();
-        loginWithEmailAndPassword(formData.email, formData.password);
+        createAccountWithEmailAndPassword(formData.email, formData.password);
     }
 
     const loginWithGoogle = () => {

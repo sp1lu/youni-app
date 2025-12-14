@@ -4,7 +4,7 @@ import { onAuthStateChanged, type User as FirebaseUser } from 'firebase/auth'
 
 /** Services */
 import { auth } from '../../../global/services'
-import { loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout } from '../services'
+import { createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout } from '../services'
 
 /** Types */
 import { getUserById, userConverter, type User } from '../../users'
@@ -13,6 +13,7 @@ interface AuthContextValue {
     user: User | null,
     baseUser: Pick<User, 'id' | 'email'> | null,
     loading: boolean,
+    createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     signInWithGoogle: () => void,
     signInWithApple: () => void,
@@ -24,6 +25,7 @@ export const AuthContext = createContext<AuthContextValue>({
     user: null,
     baseUser: null,
     loading: true,
+    createAccountWithEmailAndPassword: async () => { },
     loginWithEmailAndPassword: async () => { },
     signInWithGoogle: async () => { },
     signInWithApple: async () => { },
@@ -52,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, baseUser, loading, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
+        <AuthContext.Provider value={{ user, baseUser, loading, createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,11 +1,21 @@
 /** Dependencies */
-import { GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, type AuthError, type UserCredential } from 'firebase/auth'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, type AuthError, type UserCredential } from 'firebase/auth'
 
 
 /** Data */
 import { auth } from '../../../global/services'
 
 /** Functions */
+export const createAccountWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential: UserCredential) => {
+            console.log('Nuovo utente creato con email e password:', userCredential.user);
+        })
+        .catch((error: any) => {
+            console.log(`Errore nell'effettuare il login con email e password`, error);
+        })
+}
+
 export const loginWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
