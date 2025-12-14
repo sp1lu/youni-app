@@ -15,16 +15,20 @@ function ProtectedRoute(props: ProtectedRouteProps) {
     const { allowedRoles, children } = props;
 
     /** Contexts */
-    const { user, loading } = useAuth();
+    const { baseUser, user, loading } = useAuth();
     const navigate = useNavigate();
 
     /** Effects */
     useEffect(() => {
+        console.log('BASE USER', baseUser);
+        console.log('USER', user);
+        
         if (!loading) {
-            if (!user) navigate('/landing')
-            else if (allowedRoles && !allowedRoles.includes(user.role)) navigate('/')
+            if (!baseUser) navigate('/landing')
+            else if (baseUser && !user) navigate('/signup')
+            else if (user && allowedRoles && !allowedRoles.includes(user.role)) navigate('/')
         }
-    }, [user, loading, navigate]);
+    }, [baseUser, user, loading, navigate]);
 
     if (loading) return (
         <div className='protected-route'>

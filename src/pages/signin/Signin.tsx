@@ -1,0 +1,48 @@
+/** Dependencies */
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+
+/** Services */
+import { useAuth } from '../../features/auth';
+
+function SigninPage() {
+    /** Contexts */
+    const { loginWithEmailAndPassword } = useAuth();
+
+    /** State */
+    const [formData, setFormData] = useState<Record<string, string>>({});
+
+    /** Methods */
+    const onInputChange = (event: ChangeEvent, id: string): void => {
+        const input = event.target as HTMLInputElement;
+        const value: string = input.value;
+
+        setFormData((prevValue) => ({
+            ...prevValue,
+            [id]: value
+        }));
+    }
+
+    const onSubmit = async (formEvent: FormEvent): Promise<void> => {
+        formEvent.preventDefault();
+
+        if (
+            !('email' in formData) ||
+            !('password' in formData)
+        ) return;
+
+        loginWithEmailAndPassword(formData.email, formData.password);
+    }
+
+    /** Node */
+    return (
+        <div>
+            <form onSubmit={onSubmit}>
+                <input type="email" name="email" id="email" placeholder='Email' value={formData.email || ''} onChange={(e) => onInputChange(e, 'email')} />
+                <input type="password" name="password" id="password" placeholder='Password' value={formData.password || ''} onChange={(e) => onInputChange(e, 'password')} />
+                <button type="submit">Entra</button>
+            </form>
+        </div>
+    )
+}
+
+export default SigninPage

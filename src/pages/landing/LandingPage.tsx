@@ -1,5 +1,7 @@
+/** Dependencies */
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+
 /** Contexts */
-import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useAuth } from '../../features/auth'
 
 /** Interfaces */
