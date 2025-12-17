@@ -1,0 +1,44 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 2.75rem;
+}
+
+a {
+    font-weight: 800;
+    color: var(--primary-500, green);
+
+    &:hover {
+        color: var(--primary-600, green);
+    }
+}
+
+.title-l {
+    font-size: 2.3rem;
+    font-weight: 800;
+}
+
+.title-m {
+    font-size: 1.7rem;
+    font-weight: 800;
+}
+
+.title-s {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.subtitle-l {
+    font-size: 2.3rem;
+}
+
+.subtitle-m {
+    font-size: 1.7rem;
+}
+
+.subtitle-s {
+    font-size: 1.4rem;
+}

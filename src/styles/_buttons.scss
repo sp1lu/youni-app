@@ -1,0 +1,65 @@
+button {
+    cursor: pointer;
+    color: var(--neutral-800);
+    margin: 0;
+    padding: 0;
+    border-radius: var(--border-radius-m);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    height: 48px;
+}
+
+button.primary {
+    background-color: var(--primary-500);
+    border: 1px solid var(--neutral-800);
+
+    &:hover {
+        background-color: var(--primary-600);
+    }
+}
+
+button.secondary {
+    background-color: var(--neutral-100);
+    border: 1px solid var(--neutral-800);
+
+    &:hover {
+        background-color: var(--neutral-300);
+    }
+}
+
+button.google-btn {
+    position: relative;
+
+    .google-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url('../../public/logos/google_logo.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+    }
+}
+
+button.apple-btn {
+    position: relative;
+
+    .apple-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url('../../public/logos/apple_logo.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 26px;
+        height: 32px;
+    }
+}

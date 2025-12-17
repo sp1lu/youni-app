@@ -1,0 +1,41 @@
+.signin-page {
+    height: 100dvh;
+    max-width: 640px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-page .signin {
+    width: 100%;
+}
+
+.signin-page .signin__title {
+    margin: 0 0 48px 0;
+}
+
+.signin-page .signin__title,
+.signin-page .signin__footer {
+    text-align: center;
+}
+
+.signin-page .signin__form,
+.signin-page .signin__btns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.signin-page .signin__divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.signin-page .signin__divider .line {
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-500, lightgrey);
+}

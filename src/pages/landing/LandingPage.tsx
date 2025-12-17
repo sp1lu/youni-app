@@ -12,6 +12,9 @@ interface LoginFormData {
     password: string
 }
 
+/** Styles */
+import './LandingPage.scss'
+
 /** Component */
 function LandingPage() {
     /** Navigate */
@@ -50,28 +53,40 @@ function LandingPage() {
 
     /** Node */
     return (
-        <div>
-            <div>
-                <h1>Registrati e scopri il mondo Youni</h1>
-                <p>Accedi ad eventi e servizi dedicati al mondo universitario</p>
+        <div className='page login-page'>
+            <div className='login'>
+                <div className='login__title'>
+                    <h1 className='title-l'>Registrati e scopri il mondo Youni</h1>
+                    <p className='subtitle-s'>Accedi ad eventi e servizi dedicati al mondo universitario</p>
+                </div>
+
+                <form className='login__form' onSubmit={onFormSubmit}>
+                    <input type='email' name='email' id='email' placeholder='Email' value={formData.email} onChange={onInputChange} required />
+                    <input type='password' name='password' id='password' placeholder='Password' value={formData.password} onChange={onInputChange} required />
+                    <button type='submit' className='primary'>Partiamo!</button>
+                </form>
+
+                <div className='login__divider'>
+                    <span className='line'></span>
+                    <p>oppure</p>
+                    <span className='line'></span>
+                </div>
+
+                <div className='login__btns'>
+                    <button type='button' className='secondary google-btn' onClick={loginWithGoogle}>
+                        <span className='google-icon'></span>
+                        Continua con Google
+                    </button>
+                    <button type='button' className='secondary apple-btn' onClick={loginWithApple}>
+                        <span className='apple-icon'></span>
+                        Continua con Apple
+                    </button>
+                </div>
+
+                <div className='login__footer'>
+                    <p>Hai già un account? <Link to='/signin'>Allora accedi!</Link></p>
+                </div>
             </div>
-
-            <form onSubmit={onFormSubmit}>
-                <input type='email' name='email' id='email' placeholder='Email' value={formData.email} onChange={onInputChange} required />
-                <input type='password' name='password' id='password' placeholder='Password' value={formData.password} onChange={onInputChange} required />
-                <button type='submit'>Partiamo!</button>
-            </form>
-
-            <div>
-                <p>oppure</p>
-            </div>
-
-            <div>
-                <button type='button' onClick={loginWithGoogle}>Continua con Google</button>
-                <button type='button' onClick={loginWithApple}>Continua con Apple</button>
-            </div>
-
-            <p>Hai già un account? <Link to='/signin'>Allora accedi!</Link></p>
         </div>
     )
 }
