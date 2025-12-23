@@ -7,11 +7,11 @@ import { auth } from '../../../global/services'
 import { createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout } from '../services'
 
 /** Types */
-import { getUserById, userConverter, type User } from '../../users'
+import { appUserConverter, getUserById, type AppUser } from '../../users'
 
 interface AuthContextValue {
-    user: User | null,
-    baseUser: Pick<User, 'id' | 'email'> | null,
+    user: AppUser | null,
+    baseUser: Pick<AppUser, 'id' | 'email'> | null,
     loading: boolean,
     createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
@@ -33,8 +33,8 @@ export const AuthContext = createContext<AuthContextValue>({
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
-    const [baseUser, setBaseUser] = useState<Pick<User, 'id' | 'email'> | null>(null);
+    const [user, setUser] = useState<AppUser | null>(null);
+    const [baseUser, setBaseUser] = useState<Pick<AppUser, 'id' | 'email'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -50,8 +50,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
             setBaseUser({ id: firebaseUser.uid, email: firebaseUser.email ?? '' });
 
-            getUserById<User | null>(firebaseUser.uid, 'appUsers', userConverter)
-                .then((appUser: User | null) => setUser(appUser))
+            getUserById<AppUser | null>(firebaseUser.uid, 'appUsers', appUserConverter)
+                .then((appUser: AppUser | null) => setUser(appUser))
                 .finally(() => setLoading(false))
         });
 

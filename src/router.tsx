@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { LandingPage, SigninPage, SignupPage } from './pages'
+import { FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -28,6 +28,10 @@ export const router: DataRouter = createBrowserRouter([
                         cities: await getAllCities()
                     }
                 }
+            },
+            {
+                path: 'feed',
+                element: <ProtectedRoute><FeedPage /></ProtectedRoute>
             }
         ]
     }

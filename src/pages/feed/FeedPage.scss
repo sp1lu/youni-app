@@ -1,0 +1,13 @@
+.feed-page .list {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.feed-page .list>* {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
