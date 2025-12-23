@@ -80,28 +80,39 @@ function SignupPage() {
     /** Node */
     return (
         <div className='page signup-page'>
-            <form className='signup__form' onSubmit={onSubmit}>
-                <input type='text' name='firstName' id='firstName' placeholder='Nome' value={formData.firstName || ''} required onChange={(e) => onInputChange(e, 'firstName')} />
-                <input type='text' name='lastName' id='lastName' placeholder='Cognome' value={formData.lastName || ''} required onChange={(e) => onInputChange(e, 'lastName')} />
-
-                <p>In quale città studi</p>
-                <div>
-                    {
-                        cities.map((c: City) => (
-                            <label htmlFor={c.id} key={c.id}>
-                                <input type='radio' name='city' value={c.id} id={c.id} checked={formData.city === c.id} required onChange={(e) => onInputChange(e, 'city')} />
-                                {c.label}
-                            </label>
-                        ))
-                    }
+            <div className='signup'>
+                <div className='signup__title'>
+                    <h1 className='title-l'>Dicci qualcosa di te</h1>
+                    <p className='subtitle-s'>Non vediamo l'ora di averti a bordo.</p>
                 </div>
 
-                <button type='submit' className='primary'>Registrati</button>
-                <label htmlFor='privacy-policy'>
-                    <input type='checkbox' name='privacyPolicy' id='privacy-policy' required />
-                    Confermo di aver letto la privacy policy e la cookie policy di Youni
-                </label>
-            </form>
+                <form className='signup__form' onSubmit={onSubmit}>
+                    <div className='form__user-data'>
+                        <input type='text' name='firstName' id='firstName' placeholder='Nome' value={formData.firstName || ''} required onChange={(e) => onInputChange(e, 'firstName')} />
+                        <input type='text' name='lastName' id='lastName' placeholder='Cognome' value={formData.lastName || ''} required onChange={(e) => onInputChange(e, 'lastName')} />
+                    </div>
+
+                    <p className='form__radio-label'>In quale città studi</p>
+                    <div className='form__radio-group'>
+                        {
+                            cities.map((c: City) => (
+                                <div className='form-field' key={c.id}>
+                                    <label htmlFor={c.id}>
+                                        <input type='radio' name='city' value={c.id} id={c.id} checked={formData.city === c.id} required onChange={(e) => onInputChange(e, 'city')} />
+                                        {c.label}
+                                    </label>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    <button type='submit' className='primary'>Registrati</button>
+                    <div className='form-field'>
+                        <label htmlFor='privacy-policy'>Confermo di aver letto la privacy policy e la cookie policy di Youni</label>
+                        <input type='checkbox' name='privacyPolicy' id='privacy-policy' required />
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

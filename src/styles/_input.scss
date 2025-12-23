@@ -61,3 +61,28 @@ select {
     border: none;
     background-color: var(--neutral-100);
 }
+
+.form-field:has(input[type="radio"]) label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: inherit;
+    height: 48px;
+    padding: 4px 12px;
+    border: 1px solid var(--neutral-500);
+    border-radius: var(--border-radius-m);
+}
+
+.form-field:has(input[type="radio"]:checked) label {
+    border: 2px solid var(--neutral-800, black);
+}
+
+.form-field:has(input[type="radio"]) input {
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+}

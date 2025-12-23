@@ -6,6 +6,23 @@
     align-items: center;
 }
 
-.signup__form {
-    
+.signup-page .signup {
+    width: 100%;
+}
+
+.signup-page .signup__title {
+    margin: 0 0 48px 0;
+    text-align: center;
+}
+
+.signup-page .signup__form,
+.signup-page .form__user-data,
+.signup-page .form__radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.signup-page .form__radio-label {
+    margin: 1rem 0 0 0;
 }
