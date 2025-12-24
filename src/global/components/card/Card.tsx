@@ -12,6 +12,7 @@ type CardProps = {
     text: string,
     desc: string,
     path: string,
+    chip?: string,
     url?: never,
     objectFit?: CSSProperties['objectFit'],
     backgroundColor?: string
@@ -22,6 +23,7 @@ type CardProps = {
     text: string,
     desc: string,
     url: string,
+    chip?: string,
     path?: never,
     objectFit?: CSSProperties['objectFit'],
     backgroundColor?: string
@@ -29,7 +31,7 @@ type CardProps = {
 
 /** Component */
 function Card(props: CardProps) {
-    const { uid, img, text, desc, path, url, backgroundColor, objectFit } = props;
+    const { uid, img, text, desc, path, url, chip, backgroundColor, objectFit } = props;
 
     const Wrapper = ({ children }: { children: ReactNode }) => {
         if (path) {
@@ -46,8 +48,9 @@ function Card(props: CardProps) {
     return (
         <div className='card'>
             <Wrapper>
+                <NavLink to='/' className='card__chip'>{chip}</NavLink>
                 <div className='card__img-wrapper' style={{ backgroundColor, display: img.length === 0 ? 'none' : 'block' }}>
-                    <img src={img} className='card__img' loading='lazy' style={{ objectFit: objectFit ?? 'cover'}} />
+                    <img src={img} className='card__img' loading='lazy' style={{ objectFit: objectFit ?? 'cover' }} />
                 </div>
                 <p className='card__text fw-700'>{text}</p>
                 <p className='card__desc reset-margin'>{desc}</p>

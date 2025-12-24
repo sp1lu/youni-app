@@ -35,7 +35,10 @@ function FeedPage() {
 
     useEffect(() => {
         getAllEvents()
-            .then((events: AppEvent[]) => setEvents(events))
+            .then((events: AppEvent[]) => {
+                console.log(events);                
+                setEvents(events)
+            })
             .catch((err: unknown) => err)
     }, []);
 
@@ -58,7 +61,7 @@ function FeedPage() {
     /** Node */
     return (
         <div className='page feed-page'>
-            <p>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
+            <p className='title-s'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
 
             <div>
                 <p>Eventi</p>
@@ -66,7 +69,7 @@ function FeedPage() {
                 <Slider>
                     {
                         events.map((e: AppEvent) => (
-                            <Card key={e.id} uid={e.id} img={e.img} text={e.title} desc={formatDate(e.date)} path='discounts' />
+                            <Card key={e.id} uid={e.id} img={e.img} text={e.title} desc={formatDate(e.date)} path='discounts' chip={e.categories[0] ?? undefined} />
                         ))
                     }
                 </Slider>
@@ -78,7 +81,7 @@ function FeedPage() {
                 <div className='list'>
                     {
                         discounts.map((d: Discount) => (
-                            <Card key={d.id} uid={d.id} img={d.img} text={d.title} desc={d.discount} backgroundColor={d.color} objectFit='contain' path='discounts' />
+                            <Card key={d.id} uid={d.id} img={d.img} text={d.title} desc={d.discount} backgroundColor={d.color} objectFit='contain' path='discounts' chip={d.categories[0] ?? undefined} />
                         ))
                     }
                 </div>
