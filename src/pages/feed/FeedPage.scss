@@ -1,13 +1,25 @@
-.feed-page .list {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+@use '@styles/index' as *;
+
+.feed-page .feed__title {
+    margin: 0 0 40px 0;
 }
 
-.feed-page .list>* {
-    scroll-snap-align: start;
-    flex-shrink: 0;
+.feed-page .feed__section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 0 40px 0;
+}
+
+.feed-page .feed__section-title {
+    color: var(--neutral-800, black);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feed-page .title-icon {
+    display: inline-block;
+    @include masked-icon('/icons/chevron_right_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }

@@ -1,0 +1,8 @@
+@mixin masked-icon($icon-url, $color) {
+    mask-image: url($icon-url);
+    background-color: $color;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    height: 16px;
+    width: 16px;
+}

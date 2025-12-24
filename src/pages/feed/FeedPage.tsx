@@ -14,6 +14,7 @@ import { Card, Slider } from '../../global/components'
 
 /** Style */
 import './FeedPage.scss'
+import { NavLink } from 'react-router'
 
 /** Component */
 function FeedPage() {
@@ -36,7 +37,7 @@ function FeedPage() {
     useEffect(() => {
         getAllEvents()
             .then((events: AppEvent[]) => {
-                console.log(events);                
+                console.log(events);
                 setEvents(events)
             })
             .catch((err: unknown) => err)
@@ -61,11 +62,10 @@ function FeedPage() {
     /** Node */
     return (
         <div className='page feed-page'>
-            <p className='title-s'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
+            <p className='title-s feed__title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
 
-            <div>
-                <p>Eventi</p>
-                {/* <div className='list'> */}
+            <div className='feed__section'>
+                <NavLink to='/' className='subtitle-xs feed__section-title'>Eventi<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         events.map((e: AppEvent) => (
@@ -73,29 +73,28 @@ function FeedPage() {
                         ))
                     }
                 </Slider>
-                {/* </div> */}
             </div>
 
-            <div>
-                <p>Convenzioni</p>
-                <div className='list'>
+            <div className='feed__section'>
+                <NavLink to='/' className='subtitle-xs feed__section-title'>Convenzioni<span className='title-icon'></span></NavLink>
+                <Slider>
                     {
                         discounts.map((d: Discount) => (
                             <Card key={d.id} uid={d.id} img={d.img} text={d.title} desc={d.discount} backgroundColor={d.color} objectFit='contain' path='discounts' chip={d.categories[0] ?? undefined} />
                         ))
                     }
-                </div>
+                </Slider>
             </div>
 
-            <div>
-                <p>News</p>
-                <div className='list'>
+            <div className='feed__section'>
+                <NavLink to='/' className='subtitle-xs feed__section-title'>News<span className='title-icon'></span></NavLink>
+                <Slider>
                     {
                         posts.map((p: Post) => (
                             <Card key={p.id} uid={p.id} img={p.img} text={p.title} desc='' url={p.url} />
                         ))
                     }
-                </div>
+                </Slider>
             </div>
         </div>
     )
