@@ -1,20 +1,25 @@
 /** Dependencies */
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router'
+
+/** Types */
+import type { DiscountCategory, EventCategory } from '../../global/types'
 
 /** Services */
 import { getAllEvents, type AppEvent } from '../../features/events'
 import { getAllDiscounts, type Discount } from '../../features/discounts'
 import { getAllPosts, type Post } from '../../features/posts'
 import { getAllCities, type City } from '../../features/users'
-import { formatDate } from '../../global/services'
+import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscountCategoryLabel, getEventCategoryLabel } from '../../global/services'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
+
+/** Componenents */
 import { Card, Slider } from '../../global/components'
 
 /** Style */
 import './FeedPage.scss'
-import { NavLink } from 'react-router'
 
 /** Component */
 function FeedPage() {
@@ -26,6 +31,8 @@ function FeedPage() {
     const [events, setEvents] = useState<AppEvent[]>([]);
     const [discounts, setDiscounts] = useState<Discount[]>([]);
     const [posts, setPosts] = useState<Post[]>([]);
+    const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
+    const [discountCategories, setDiscountCategories] = useState<DiscountCategory[]>([]);
 
     /** Effects */
     useEffect(() => {
@@ -59,6 +66,18 @@ function FeedPage() {
             .catch((err: unknown) => err)
     }, [cities, user]);
 
+    useEffect(() => {
+        getAllEventCategories()
+            .then((categories: EventCategory[]) => setEventCategories(categories))
+            .catch((err: unknown) => err)
+    }, [])
+
+    useEffect(() => {
+        getAllDiscountCategories()
+            .then((categories: DiscountCategory[]) => setDiscountCategories(categories))
+            .catch((err: unknown) => err)
+    }, [])
+
     /** Node */
     return (
         <div className='page feed-page'>
@@ -69,7 +88,19 @@ function FeedPage() {
                 <Slider>
                     {
                         events.map((e: AppEvent) => (
-                            <Card key={e.id} uid={e.id} img={e.img} text={e.title} desc={formatDate(e.date)} path='discounts' chip={e.categories[0] ?? undefined} />
+                            <Card key={e.id}
+                                uid={e.id}
+                                img={e.img}
+                                text={e.title}
+                                desc={formatDate(e.date)}
+                                path='discounts'
+                                chip={
+                                    (() => {
+                                        const id = e.categories[0];
+                                        return id ? getEventCategoryLabel(id, eventCategories) : id;
+                                    })()
+                                }
+                            />
                         ))
                     }
                 </Slider>
@@ -80,7 +111,21 @@ function FeedPage() {
                 <Slider>
                     {
                         discounts.map((d: Discount) => (
-                            <Card key={d.id} uid={d.id} img={d.img} text={d.title} desc={d.discount} backgroundColor={d.color} objectFit='contain' path='discounts' chip={d.categories[0] ?? undefined} />
+                            <Card key={d.id}
+                                uid={d.id}
+                                img={d.img}
+                                text={d.title}
+                                desc={d.discount}
+                                backgroundColor={d.color}
+                                objectFit='contain'
+                                path='discounts'
+                                chip={
+                                    (() => {
+                                        const id = d.categories[0];
+                                        return id ? getDiscountCategoryLabel(id, eventCategories) : id;
+                                    })()
+                                }
+                            />
                         ))
                     }
                 </Slider>
