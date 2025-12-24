@@ -122,7 +122,7 @@ function FeedPage() {
                                 chip={
                                     (() => {
                                         const id = d.categories[0];
-                                        return id ? getDiscountCategoryLabel(id, eventCategories) : id;
+                                        return id ? getDiscountCategoryLabel(id, discountCategories) : id;
                                     })()
                                 }
                             />
