@@ -28,6 +28,15 @@ button.secondary {
     }
 }
 
+button.tertiary {
+    background-color: var(--neutral-100);
+    border: none;
+
+    &:hover {
+        background-color: var(--neutral-300);
+    }
+}
+
 button.google-btn {
     position: relative;
 

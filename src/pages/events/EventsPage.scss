@@ -1,3 +1,22 @@
+@use '@styles/index' as *;
+
+.events-page .filters-toggle {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 999;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-page .filters-icon {
+    display: flex;
+    @include masked-icon('/icons/filter_list_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
 .events-page .drawer {
     position: fixed;
     top: 0;

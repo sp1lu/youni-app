@@ -86,7 +86,7 @@ function FeedPage() {
 
             <p className='title-s feed-title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
 
-            <div className='feed__section'>
+            <div className='feed-section'>
                 <NavLink to='/events' className='subtitle-xs section-title'>Eventi<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
