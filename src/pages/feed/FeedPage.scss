@@ -7,18 +7,18 @@
     z-index: 999;
 }
 
-.feed-page .feed__title {
+.feed-page .feed-title {
     margin: 0 0 40px 0;
 }
 
-.feed-page .feed__section {
+.feed-page .feed-section {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin: 0 0 40px 0;
 }
 
-.feed-page .feed__section-title {
+.feed-page .section-title {
     color: var(--neutral-800, black);
     text-decoration: none;
     display: flex;

@@ -84,10 +84,10 @@ function FeedPage() {
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
 
-            <p className='title-s feed__title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
+            <p className='title-s feed-title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
 
             <div className='feed__section'>
-                <NavLink to='/events' className='subtitle-xs feed__section-title'>Eventi<span className='title-icon'></span></NavLink>
+                <NavLink to='/events' className='subtitle-xs section-title'>Eventi<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         events.map((e: AppEvent) => (
@@ -109,8 +109,8 @@ function FeedPage() {
                 </Slider>
             </div>
 
-            <div className='feed__section'>
-                <NavLink to='/' className='subtitle-xs feed__section-title'>Convenzioni<span className='title-icon'></span></NavLink>
+            <div className='feed-section'>
+                <NavLink to='/' className='subtitle-xs section-title'>Convenzioni<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         discounts.map((d: Discount) => (
@@ -134,8 +134,8 @@ function FeedPage() {
                 </Slider>
             </div>
 
-            <div className='feed__section'>
-                <NavLink to='/' className='subtitle-xs feed__section-title'>News<span className='title-icon'></span></NavLink>
+            <div className='feed-section'>
+                <NavLink to='/' className='subtitle-xs section-title'>News<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         posts.map((p: Post) => (
