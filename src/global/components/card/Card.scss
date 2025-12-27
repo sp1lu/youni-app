@@ -12,7 +12,6 @@
 
 .card__chip {
     position: absolute;
-    text-decoration: none;
     top: 8px;
     left: 8px;
     margin: 0;
@@ -53,4 +52,10 @@
 .card__desc {
     font-weight: 400;
     color: var(--neutral-600, grey);
+}
+
+@media screen and (max-width: 992px) {
+    .card {
+        max-width: 100%;
+    }
 }

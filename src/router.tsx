@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
+import { EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -32,6 +32,10 @@ export const router: DataRouter = createBrowserRouter([
             {
                 path: 'feed',
                 element: <ProtectedRoute><FeedPage /></ProtectedRoute>
+            },
+            {
+                path: 'events',
+                element: <ProtectedRoute><EventsPage /></ProtectedRoute>
             }
         ]
     }

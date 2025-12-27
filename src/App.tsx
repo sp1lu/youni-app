@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <button type="button" onClick={onLogout}>LOGOUT</button>
+      {/* <button type="button" onClick={onLogout}>LOGOUT</button> */}
       <Outlet />
     </>
   )

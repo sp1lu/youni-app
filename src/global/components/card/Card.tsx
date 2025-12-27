@@ -48,7 +48,7 @@ function Card(props: CardProps) {
     return (
         <div className='card'>
             <Wrapper>
-                <NavLink to='/' className='card__chip'>{chip}</NavLink>
+                <p className='card__chip'>{chip}</p>
                 <div className='card__img-wrapper' style={{ backgroundColor, display: img.length === 0 ? 'none' : 'block' }}>
                     <img src={img} className='card__img' loading='lazy' style={{ objectFit: objectFit ?? 'cover' }} />
                 </div>

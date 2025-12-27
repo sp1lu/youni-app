@@ -1,5 +1,12 @@
 @use '@styles/index' as *;
 
+.feed-page .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+
 .feed-page .feed__title {
     margin: 0 0 40px 0;
 }

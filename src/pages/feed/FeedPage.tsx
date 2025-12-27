@@ -16,7 +16,7 @@ import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscoun
 import { useAuth } from '../../features/auth'
 
 /** Componenents */
-import { Card, Slider } from '../../global/components'
+import { Card, Drawer, Navbar, Slider } from '../../global/components'
 
 /** Style */
 import './FeedPage.scss'
@@ -24,7 +24,7 @@ import './FeedPage.scss'
 /** Component */
 function FeedPage() {
     /** Context */
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     /** State */
     const [cities, setCities] = useState<City[]>([]);
@@ -44,7 +44,6 @@ function FeedPage() {
     useEffect(() => {
         getAllEvents()
             .then((events: AppEvent[]) => {
-                console.log(events);
                 setEvents(events)
             })
             .catch((err: unknown) => err)
@@ -81,10 +80,14 @@ function FeedPage() {
     /** Node */
     return (
         <div className='page feed-page'>
+            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+            </Drawer>
+
             <p className='title-s feed__title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
 
             <div className='feed__section'>
-                <NavLink to='/' className='subtitle-xs feed__section-title'>Eventi<span className='title-icon'></span></NavLink>
+                <NavLink to='/events' className='subtitle-xs feed__section-title'>Eventi<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         events.map((e: AppEvent) => (
