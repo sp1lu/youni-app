@@ -17,6 +17,7 @@
     border-radius: var(--border-radius-m);
 
     &:hover {
+        color: var(--neutral-900);
         background-color: var(--neutral-300);
     }
 }

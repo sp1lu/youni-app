@@ -59,7 +59,7 @@ function EventsPage() {
                             img={e.img}
                             text={e.title}
                             desc={formatDate(e.date)}
-                            path='discounts'
+                            path='events'
                             chip={
                                 (() => {
                                     const id = e.categories[0];
