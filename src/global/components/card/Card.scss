@@ -1,6 +1,6 @@
 .card {
     position: relative;
-    max-width: 240px;
+    max-width: 288px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -54,7 +54,7 @@
     color: var(--neutral-600, grey);
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 576px) {
     .card {
         max-width: 100%;
     }

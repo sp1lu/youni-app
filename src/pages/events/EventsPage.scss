@@ -31,13 +31,19 @@
 
 .events-page .events-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: start;
     column-gap: 24px;
     row-gap: 40px;
 }
 
 @media screen and (max-width: 992px) {
+    .events-page .events-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
     .events-page .events-list {
         grid-template-columns: repeat(2, 1fr);
     }

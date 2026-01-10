@@ -1,4 +1,5 @@
 export * from './card'
 export * from './drawer'
+export * from './modal'
 export * from './navbar'
 export * from './slider'

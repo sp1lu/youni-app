@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /** Services */
 import { formatDate, getAllEventCategories, getEventCategoryLabel } from '../../global/services'
@@ -11,9 +11,10 @@ import { useAuth } from '../../features/auth'
 /** Types */
 import type { AppEvent } from '../../features/events'
 import type { EventCategory } from '../../global/types'
+import type { ModalHandle } from '../../global/components/modal/Modal'
 
 /** Components */
-import { Card, Drawer, Navbar } from '../../global/components'
+import { Card, Drawer, Modal, Navbar } from '../../global/components'
 
 /** Style */
 import './EventsPage.scss'
@@ -22,6 +23,9 @@ import './EventsPage.scss'
 function EventsPage() {
     /** Contexts */
     const { user, logout } = useAuth();
+
+    /** Refs */
+    const modalRef = useRef<ModalHandle | null>(null);
 
     /** State */
     const [events, setEvents] = useState<AppEvent[]>([]);
@@ -42,11 +46,16 @@ function EventsPage() {
             .catch((err: unknown) => err)
     }, [])
 
+    /** Methods */
+    const onModalToggleClick = () => {
+        modalRef.current?.open();
+    }
+
     /** Node */
     return (
         <div className='page events-page'>
             {/* <div className='page-header'> */}
-                <button type='button' className='button tertiary filters-toggle'>
+                <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
                     <span className='filters-icon'></span>
                 </button>
                 <p className='title-s events-title'>Eventi</p>
@@ -74,6 +83,10 @@ function EventsPage() {
                     ))
                 }
             </div>
+
+            <Modal ref={modalRef} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} title='Filtri'>
+                <p>Modal content</p>
+            </Modal>
         </div>
     )
 }
