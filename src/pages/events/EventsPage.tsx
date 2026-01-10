@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 
 /** Services */
 import { formatDate, getAllEventCategories, getEventCategoryLabel } from '../../global/services'
@@ -29,13 +29,16 @@ function EventsPage() {
 
     /** State */
     const [events, setEvents] = useState<AppEvent[]>([]);
+    const [filteredEvents, setFilteredEvents] = useState<AppEvent[]>([]);
     const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
+    const [filterForm, setFilterForm] = useState<Record<string, boolean>>({});
 
     /** Effects */
     useEffect(() => {
         getAllEvents()
             .then((events: AppEvent[]) => {
                 setEvents(events.filter((e) => e.city === user?.city))
+                setFilteredEvents(events.filter((e) => e.city === user?.city))
             })
             .catch((err: unknown) => err)
     }, [])
@@ -47,26 +50,53 @@ function EventsPage() {
     }, [])
 
     /** Methods */
-    const onModalToggleClick = () => {
+    const onModalToggleClick = (): void => {
         modalRef.current?.open();
+    }
+
+    const onInpuChange = (event: ChangeEvent, id: string): void => {
+        const input = event.target as HTMLInputElement;
+        const value: boolean = input.checked;
+
+        setFilterForm((prevValue) => {
+            return {
+                ...prevValue,
+                [id]: value
+            }
+        })
+    }
+
+    const onFormSubmit = (formEvent: FormEvent): void => {
+        formEvent.preventDefault();
+        const keys: Set<string> = new Set(
+            Object.entries(filterForm)
+                .filter(([_, v]: [string, boolean]) => v)
+                .map(([k, _]: [string, boolean]) => k)
+        );
+
+        setFilteredEvents(
+            keys.size === 0 ?
+            events :
+            events.filter((event: AppEvent) => event.categories.some(c => keys.has(c)))
+        );
     }
 
     /** Node */
     return (
         <div className='page events-page'>
             {/* <div className='page-header'> */}
-                <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
-                    <span className='filters-icon'></span>
-                </button>
-                <p className='title-s events-title'>Eventi</p>
-                <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                    <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
-                </Drawer>
+            <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
+                <span className='filters-icon'></span>
+            </button>
+            <p className='title-s events-title'>Eventi</p>
+            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+            </Drawer>
             {/* </div> */}
 
             <div className='events-list'>
                 {
-                    events.map((e: AppEvent) => (
+                    filteredEvents.map((e: AppEvent) => (
                         <Card key={e.id}
                             uid={e.id}
                             img={e.img}
@@ -85,7 +115,17 @@ function EventsPage() {
             </div>
 
             <Modal ref={modalRef} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} title='Filtri'>
-                <p>Modal content</p>
+                <form onSubmit={onFormSubmit}>
+                    {
+                        eventCategories.map((c: EventCategory) => (
+                            <label key={c.id}>
+                                <input type='checkbox' name='event-category' checked={!!filterForm[c.id]} onChange={(e) => onInpuChange(e, c.id)} />
+                                {c.label}
+                            </label>
+                        ))
+                    }
+                    <button type='submit'>Mostra risultati</button>
+                </form>
             </Modal>
         </div>
     )
