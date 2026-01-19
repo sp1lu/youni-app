@@ -1,0 +1,20 @@
+label.chip {
+    padding: 8px 16px;
+    border-radius: var(--border-radius-xl, 16px);
+    border: 1px solid var(--neutral-400, lightgrey);
+}
+
+label.chip input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+label.chip:has(input[type="checkbox"]:checked) {
+    border-color: var(--neutral-800, black);
+    background-color: var(--neutral-200, lightgrey);
+}

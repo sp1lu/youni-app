@@ -1,10 +1,13 @@
 .modal {
     position: fixed;
     left: 0;
-    bottom: -72%;
+    bottom: -100dvh;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
     background-color: var(--neutral-100, #fff);
-    width: 100%;
-    height: 72%;
+    width: 100dvw;
+    height: 100dvh;
     transition: bottom .2s ease-in-out;
     border: 1px solid var(--neutral-400, lightgrey);
     border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
@@ -16,8 +19,8 @@
 
 .modal-toggle {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 24px;
+    right: 24px;
     z-index: 3;
 }
 
@@ -26,7 +29,7 @@
 }
 
 .modal-header__title-wrapper {
-    padding: 21px 0;
+    padding: 32px 0 16px 0;
     border-bottom: 1px solid var(--neutral-400, lightgrey);
 }
 
@@ -38,6 +41,9 @@
 
 .modal-content {
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .modal-toggle__btn {

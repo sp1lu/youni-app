@@ -37,6 +37,28 @@
     row-gap: 40px;
 }
 
+.events-page .events-list__empty {
+    text-align: center;
+}
+
+.events-page .filter-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.events-page .filter-form__category-name {
+    margin: 0 0 16px 0;
+    font-weight: 700;
+}
+
+.events-page .filter-form__radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 @media screen and (max-width: 992px) {
     .events-page .events-list {
         grid-template-columns: repeat(3, 1fr);

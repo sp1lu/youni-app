@@ -20,8 +20,6 @@ const Modal = forwardRef<ModalHandle, ModalProps>((props, ref) => {
     const { children, closeIcon, title } = props;
 
     /** Refs */
-    const modalRef = useRef<HTMLDivElement | null>(null);
-
     useImperativeHandle(ref, () => {
         return {
             open: () => setIsOpen(true),
@@ -39,7 +37,7 @@ const Modal = forwardRef<ModalHandle, ModalProps>((props, ref) => {
 
     /** Node */
     return (
-        <div className={`modal ${isOpen ? 'modal--open' : ''}`} ref={modalRef}>
+        <div className={`modal ${isOpen ? 'modal--open' : ''}`}>
             <label className='modal-toggle'>
                 <button type='button' className='modal-toggle__btn tertiary' onClick={onBtnClick}>
                     <span className='modal-toggle__icon' style={{ maskImage: `url(${closeIcon})` }}></span>
