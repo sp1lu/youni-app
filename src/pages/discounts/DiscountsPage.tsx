@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 
 /** Services */
-import { formatDate, getAllDiscountCategories, getDiscountCategoryLabel } from '../../global/services'
+import { getAllDiscountCategories, getDiscountCategoryLabel } from '../../global/services'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
