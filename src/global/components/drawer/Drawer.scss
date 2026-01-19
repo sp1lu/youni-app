@@ -3,6 +3,8 @@
     top: 24px;
     right: 24px;
     z-index: 3;
+    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
+    border-radius: var(--border-radius-m);
 }
 
 .drawer-content {
