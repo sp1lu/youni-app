@@ -1,0 +1,79 @@
+@use '@styles/index' as *;
+
+.discounts-page .filters-toggle {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 999;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
+}
+
+.discounts-page .filters-icon {
+    display: flex;
+    @include masked-icon('/icons/filter_list_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.discounts-page .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.discounts-page .discounts-title {
+    margin: 0 0 40px 0;
+    text-align: center;
+}
+
+.discounts-page .discounts-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+    column-gap: 24px;
+    row-gap: 40px;
+}
+
+.discounts-page .discounts-list__empty {
+    text-align: center;
+}
+
+.discounts-page .filter-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.discounts-page .filter-form__category-name {
+    margin: 0 0 16px 0;
+    font-weight: 700;
+}
+
+.discounts-page .filter-form__radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media screen and (max-width: 992px) {
+    .discounts-page .discounts-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .discounts-page .discounts-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .discounts-page .discounts-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

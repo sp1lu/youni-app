@@ -110,7 +110,7 @@ function FeedPage() {
             </div>
 
             <div className='feed-section'>
-                <NavLink to='/' className='subtitle-xs section-title'>Convenzioni<span className='title-icon'></span></NavLink>
+                <NavLink to='/discounts' className='subtitle-xs section-title'>Convenzioni<span className='title-icon'></span></NavLink>
                 <Slider>
                     {
                         discounts.map((d: Discount) => (
