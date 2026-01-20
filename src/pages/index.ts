@@ -1,3 +1,4 @@
+export * from './discount'
 export * from './discounts'
 export * from './events'
 export * from './feed'

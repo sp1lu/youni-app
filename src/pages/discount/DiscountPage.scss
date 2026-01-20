@@ -1,0 +1,33 @@
+@use '@styles/index' as *;
+
+.discount-page .discount-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-m, 16px);
+}
+
+.discount-page .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.discount-page .back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 999;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-m, 4px);
+    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
+}
+
+.discount-page .back-btn__icon {
+    @include masked-icon('/icons/filter_list_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));    
+}

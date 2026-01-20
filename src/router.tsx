@@ -1,5 +1,5 @@
 /** Dependencies */
-import { createBrowserRouter, type DataRouter } from 'react-router'
+import { createBrowserRouter, Outlet, Navigate, type DataRouter } from 'react-router'
 
 /** Services */
 import { getAllCities } from './features/users/services'
@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { DiscountsPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
+import { DiscountPage, DiscountsPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -39,7 +39,17 @@ export const router: DataRouter = createBrowserRouter([
             },
             {
                 path: 'discounts',
-                element: <ProtectedRoute><DiscountsPage /></ProtectedRoute>
+                element: <ProtectedRoute><Outlet /></ProtectedRoute>,
+                children: [
+                    {
+                        index: true,
+                        element: <ProtectedRoute><DiscountsPage /></ProtectedRoute>
+                    },
+                    {
+                        path: ':id',
+                        element: <ProtectedRoute><DiscountPage></DiscountPage></ProtectedRoute>
+                    }
+                ]
             }
         ]
     }

@@ -24,3 +24,7 @@ export async function getAllCities(): Promise<City[]> {
 
     return cities;
 }
+
+export function getCityLabel(id: string, cities: City[]): string | undefined {
+    return cities.find((C: City) => C.id === id)?.label ?? undefined;
+}
