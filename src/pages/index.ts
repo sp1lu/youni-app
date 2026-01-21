@@ -1,5 +1,6 @@
 export * from './discount'
 export * from './discounts'
+export * from './event'
 export * from './events'
 export * from './feed'
 export * from './landing'

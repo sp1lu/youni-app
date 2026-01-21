@@ -1,0 +1,107 @@
+@use '@styles/index' as *;
+
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100dvw;
+    background-color: var(--neutral-100, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-page .back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 999;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-m, 4px);
+    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
+}
+
+.event-page .back-btn__icon {
+    @include masked-icon('/icons/arrow_back_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.event-page .header-title {
+    font-weight: 700;
+}
+
+.event-page .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.event-page .event-body {
+    margin: 80px 0;
+}
+
+.event-page .event-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-m, 16px);
+}
+
+.event-page .event-title__wrapper {
+    margin: 24px 0;
+}
+
+.event-page .event-title {
+    text-align: center;
+    margin: 0;
+}
+
+.event-page .event-desc {
+    text-align: center;
+    margin: 0;
+    color: var(--neutral-700, grey);
+}
+
+.event-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 32px 0;
+}
+
+.event-page .event-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.event-page .event-contact {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--neutral-800, black);
+    font-weight: 400;
+}
+
+.event-page .event-contact__email-icon {
+    @include masked-icon('/icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.event-page .event-contact__phone-icon {
+    @include masked-icon('/icons/call_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.event-page .event-contact__address-icon {
+    @include masked-icon('/icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.event-page .event-contact__icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}

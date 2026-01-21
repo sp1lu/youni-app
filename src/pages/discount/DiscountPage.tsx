@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import EditorJSHTML from 'editorjs-html'
 
@@ -8,13 +8,14 @@ import { useAuth } from '../../features/auth'
 
 /** Models */
 import { type Discount } from '../../features/discounts'
+import { type City } from '../../features/users'
 
 /** Services */
 import { getDiscountById } from '../../features/discounts'
 
 /** Components */
 import { Drawer, Navbar } from '../../global/components'
-import { getAllCities, getCityLabel, type City } from '../../features/users'
+import { getAllCities, getCityLabel } from '../../features/users'
 
 /** Style */
 import './DiscountPage.scss'
@@ -50,8 +51,6 @@ function DiscountPage() {
             })
     }, []);
 
-    /** Methods */
-
     /** Node */
     return (
         <div className='page discount-page'>
@@ -59,9 +58,6 @@ function DiscountPage() {
                 !discount ?
                     '' :
                     <div>
-                        {/* <button type='button' className='button tertiary back-btn'>
-                            <span className='filters-icon'></span>
-                        </button> */}
                         <div className='page-header'>
                             <Link to='/discounts'>
                                 <div className='back-btn'>
