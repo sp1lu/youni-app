@@ -62,31 +62,48 @@ function DiscountPage() {
                         {/* <button type='button' className='button tertiary back-btn'>
                             <span className='filters-icon'></span>
                         </button> */}
-                        <Link to='/discounts'>
-                            <div className='back-btn'>
-                                <span className='back-btn__icon'></span>
-                            </div>
-                        </Link>
-                        <p>
-                            {
-                                cities ? `${getCityLabel(discount.city, cities)} ∙ Convenzione` : 'Convenzione'
-                            }
-                        </p>
-                        <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                            <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
-                        </Drawer>
-                        <img src={discount.img} alt='Immagine della convenzione' style={{ backgroundColor: discount.color }} className='discount-img' />
-                        <h2>{discount.title}</h2>
-                        <p>{discount.discount}</p>
+                        <div className='page-header'>
+                            <Link to='/discounts'>
+                                <div className='back-btn'>
+                                    <span className='back-btn__icon'></span>
+                                </div>
+                            </Link>
+                            <p className='header-title'>
+                                {
+                                    cities ? `${getCityLabel(discount.city, cities)} ∙ Convenzione` : 'Convenzione'
+                                }
+                            </p>
+                            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+                                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+                            </Drawer>
+                        </div>
 
-                        <h2>Descrizione convenzione</h2>
-                        <div dangerouslySetInnerHTML={{ __html: editorjsParser.parse(discount.content) }}></div>
-                        <div>
-                            <h2>Contatti</h2>
-                            <div>
-                                <a href={`mailto:${discount.email}`}>{discount.email}</a>
-                                <a href={`tel:+39${discount.phone}`}>{discount.phone}</a>
-                                <a href={`https://www.google.com/maps/search/?api=1&query=${discount.address}`} target='_blank'>{discount.address}</a>
+                        <div className='discount-body'>
+                            <img src={discount.img} alt='Immagine della convenzione' style={{ backgroundColor: discount.color }} className='discount-img' />
+                            <div className='discount-title__wrapper'>
+                                <h2 className='discount-title'>{discount.title}</h2>
+                                <p className='discount-desc subtitle-xs'>{discount.discount}</p>
+                            </div>
+                            <div className='divider'></div>
+                            <h2>Descrizione convenzione</h2>
+                            <div dangerouslySetInnerHTML={{ __html: editorjsParser.parse(discount.content) }}></div>
+                            <div className='divider'></div>
+                            <div className='discount-info'>
+                                <h2>Contatti</h2>
+                                <div className='discount-contacts'>
+                                    <a href={`mailto:${discount.email}`} className='discount-contact'>
+                                        <span className='discount-contact__icon discount-contact__email-icon'></span>
+                                        {discount.email}
+                                    </a>
+                                    <a href={`tel:+39${discount.phone}`} className='discount-contact'>
+                                        <span className='discount-contact__icon discount-contact__phone-icon'></span>
+                                        (+39) {discount.phone}
+                                    </a>
+                                    <a href={`https://www.google.com/maps/search/?api=1&query=${discount.address}`} target='_blank' className='discount-contact'>
+                                        <span className='discount-contact__icon discount-contact__address-icon'></span>
+                                        {discount.address}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

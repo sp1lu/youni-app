@@ -17,7 +17,10 @@ export const router: DataRouter = createBrowserRouter([
         path: '/',
         element: <App />,
         children: [
-            { index: true, element: <ProtectedRoute><p>SONO LA HOME FUTURA</p></ProtectedRoute> },
+            { index: true,
+                element: <Navigate to='feed'></Navigate>,
+                
+            },
             { path: 'landing', element: <LandingPage /> },
             { path: 'signin', element: <SigninPage /> },
             {

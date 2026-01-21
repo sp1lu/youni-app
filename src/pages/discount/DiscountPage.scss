@@ -1,21 +1,19 @@
 @use '@styles/index' as *;
 
-.discount-page .discount-img {
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
-    border-radius: var(--border-radius-m, 16px);
-}
-
-.discount-page .drawer {
+.page-header {
     position: fixed;
     top: 0;
-    right: 0;
-    z-index: 999;
+    left: 0;
+    height: 80px;
+    width: 100dvw;
+    background-color: var(--neutral-100, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .discount-page .back-btn {
-    position: fixed;
+    position: absolute;
     top: 24px;
     left: 24px;
     z-index: 999;
@@ -29,5 +27,81 @@
 }
 
 .discount-page .back-btn__icon {
-    @include masked-icon('/icons/filter_list_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));    
+    @include masked-icon('/icons/arrow_back_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.discount-page .header-title {
+    font-weight: 700;
+}
+
+.discount-page .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.discount-page .discount-body {
+    margin: 80px 0;
+}
+
+.discount-page .discount-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-m, 16px);
+}
+
+.discount-page .discount-title__wrapper {
+    margin: 24px 0;
+}
+
+.discount-page .discount-title {
+    text-align: center;
+    margin: 0;
+}
+
+.discount-page .discount-desc {
+    text-align: center;
+    margin: 0;
+    color: var(--neutral-700, grey);
+}
+
+.discount-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 32px 0;
+}
+
+.discount-page .discount-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.discount-page .discount-contact {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--neutral-800, black);
+    font-weight: 400;
+}
+
+.discount-page .discount-contact__email-icon {
+    @include masked-icon('/icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.discount-page .discount-contact__phone-icon {
+    @include masked-icon('/icons/call_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.discount-page .discount-contact__address-icon {
+    @include masked-icon('/icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.discount-page .discount-contact__icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
 }
