@@ -75,22 +75,43 @@ function EventPage() {
 
                         <div className='event-body'>
                             <img src={event.img} alt='Immagine della convenzione' className='event-img' />
-                            <div className='event-title__wrapper'>
+                            <div className='event-title-wrapper'>
                                 <h2 className='event-title'>{event.title}</h2>
                                 <p className='event-desc subtitle-xs'>{event.desc}</p>
+                            </div>
+                            <div className='divider'></div>
+                            <div className='event-infos'>
+                                <h2>Dove e quando</h2>
+                                <div className='event-infos__content'>
+                                    <div className='event-time'>
+                                        <span className='event-info__icon event-info__time-icon'></span>
+                                        <div className='event-time__details'>
+                                            <p className='event-info__primary'>{new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' }).format(event.date)}</p>
+                                            <p className='event-info__secondary'>{event.time}</p>
+                                        </div>
+                                    </div>
+
+                                    <a href={`https://www.google.com/maps/search/?api=1&query=${event.address}`} target='_blank' className='event-info event-info__primary'>
+                                        <span className='event-info__icon event-info__address-icon'></span>
+                                        {event.address}
+                                    </a>
+                                </div>
                             </div>
                             <div className='divider'></div>
                             <h2>Descrizione Evento</h2>
                             <div dangerouslySetInnerHTML={{ __html: editorjsParser.parse(event.content) }}></div>
                             <div className='divider'></div>
-                            <div className='event-info'>
-                                <h2>Dove e quando</h2>
-                                <div className='event-contacts'>
-                                    <a href={`https://www.google.com/maps/search/?api=1&query=${event.address}`} target='_blank' className='event-contact'>
-                                        <span className='event-contact__icon event-contact__address-icon'></span>
-                                        {event.address}
-                                    </a>
-                                </div>
+                            <div className='video-wrapper'>
+                                <iframe src={`https://www.youtube.com/embed/${event.video}`} className='video' title={event.title} allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>
+                            </div>
+
+                            <div className='event-cta'>
+                                {
+                                    event.price === 0 ?
+                                        <p className='event-price'>Gratuito</p> :
+                                        <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
+                                }
+                                <button type='button' className='primary'>Partecipa</button>
                             </div>
                         </div>
                     </div>
