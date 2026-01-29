@@ -1,48 +1,7 @@
 @use '@styles/index' as *;
 
-.page-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 80px;
-    width: 100dvw;
-    background-color: var(--neutral-100, white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.discount-page .back-btn {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    z-index: 999;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius-m, 4px);
-    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
-}
-
-.discount-page .back-btn__icon {
-    @include masked-icon('/icons/arrow_back_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
-}
-
-.discount-page .header-title {
-    font-weight: 700;
-}
-
-.discount-page .drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-}
-
 .discount-page .discount-body {
-    margin: 80px 0;
+    margin: 32px 0;
 }
 
 .discount-page .discount-img {

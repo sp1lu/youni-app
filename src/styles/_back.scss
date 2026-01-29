@@ -1,0 +1,19 @@
+@use '@styles/icons' as icons;
+
+.page .back-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
+}
+
+.page .back-btn__icon {
+    @include icons.masked-icon('/icons/arrow_back_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}

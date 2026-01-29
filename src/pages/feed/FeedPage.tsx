@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router'
 
 /** Types */
@@ -15,8 +15,11 @@ import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscoun
 /** Contexts */
 import { useAuth } from '../../features/auth'
 
+/** Types */
+import type { DrawerHandle } from '../../global/components/drawer/Drawer'
+
 /** Componenents */
-import { Card, Drawer, Navbar, Slider } from '../../global/components'
+import { Card, Drawer, Header, Navbar, Slider } from '../../global/components'
 
 /** Style */
 import './FeedPage.scss'
@@ -25,6 +28,9 @@ import './FeedPage.scss'
 function FeedPage() {
     /** Context */
     const { user, logout } = useAuth();
+
+    /** Refs */
+    const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
     const [cities, setCities] = useState<City[]>([]);
@@ -77,15 +83,24 @@ function FeedPage() {
             .catch((err: unknown) => err)
     }, [])
 
+    /** Methods */
+    const onDrawerToggleClick = (): void => {               
+        drawerRef.current?.open();
+    }
+
     /** Node */
     return (
         <div className='page feed-page'>
-            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+            <Header text={`Ciao 👋${user ? `, ${user.firstName}` : ''}!`} style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'left' }}>
+                <Header.Right>
+                    <button type='button' className='drawer-toggle tertiary' onClick={onDrawerToggleClick}>
+                        <span className='drawer-toggle__icon'></span>
+                    </button>
+                </Header.Right>
+            </Header>
+            <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
-
-            <p className='title-s feed-title'>Ciao 👋{user ? `, ${user.firstName}` : ''}!</p>
-
             <div className='feed-section'>
                 <NavLink to='/events' className='subtitle-xs section-title'>Eventi<span className='title-icon'></span></NavLink>
                 <Slider>

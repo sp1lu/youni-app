@@ -1,21 +1,10 @@
 @use '@styles/index' as *;
 
-.feed-page .drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-}
-
-.feed-page .feed-title {
-    margin: 0 0 40px 0;
-}
-
 .feed-page .feed-section {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin: 0 0 40px 0;
+    margin: 32px 0;
 }
 
 .feed-page .section-title {

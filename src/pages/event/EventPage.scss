@@ -1,49 +1,7 @@
 @use '@styles/index' as *;
 
-.page-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9;
-    height: 80px;
-    width: 100dvw;
-    background-color: var(--neutral-100, white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.event-page .back-btn {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    z-index: 999;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius-m, 4px);
-    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
-}
-
-.event-page .back-btn__icon {
-    @include masked-icon('/icons/arrow_back_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
-}
-
-.event-page .header-title {
-    font-weight: 700;
-}
-
-.event-page .drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-}
-
 .event-page .event-body {
-    margin: 80px 0 24px 0;
+    margin: 32px 0;
 }
 
 .event-page .event-img {
@@ -142,10 +100,6 @@
 }
 
 .event-page .event-cta {
-    // position: fixed;
-    // bottom: 24px;
-    // left: 50%;
-    // transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;

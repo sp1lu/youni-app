@@ -1,0 +1,57 @@
+@use '@styles/index' as *;
+
+.account-page .account-options {
+    margin: 32px 0;
+}
+
+.account-page .account-option {
+    width: 100%;
+    height: 64px;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: var(--neutral-400, lightgrey);
+}
+
+.account-page .account-option:first-child {
+    border-width: 1px 0;
+}
+
+.account-page .account-option__link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    color: var(--neutral-800, black);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.account-page .account-option__icon--qr {
+    @include masked-icon('/icons/qr_code_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.account-page .account-option__icon--data {
+    @include masked-icon('/icons/person_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.account-page .account-option__icon--ticket {
+    @include masked-icon('/icons/local_activity_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+}
+
+.account-page .account-option__icon {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.account-page .account-option__label {
+    flex: 1
+}
+
+.account-page .account-option__arrow {
+    @include masked-icon('/icons/chevron_right_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}

@@ -1,41 +1,12 @@
 @use '@styles/index' as *;
 
-.discounts-page .filters-toggle {
-    position: fixed;
-    top: 24px;
-    left: 24px;
-    z-index: 999;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
-}
-
-.discounts-page .filters-icon {
-    display: flex;
-    @include masked-icon('/icons/filter_list_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
-}
-
-.discounts-page .drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-}
-
-.discounts-page .discounts-title {
-    margin: 0 0 40px 0;
-    text-align: center;
-}
-
 .discounts-page .discounts-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: start;
     column-gap: 24px;
     row-gap: 40px;
+    margin: 32px 0;
 }
 
 .discounts-page .discounts-list__empty {

@@ -12,9 +12,10 @@ import { useAuth } from '../../features/auth'
 import type { AppEvent } from '../../features/events'
 import type { EventCategory } from '../../global/types'
 import type { ModalHandle } from '../../global/components/modal/Modal'
+import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Components */
-import { Card, Drawer, Modal, Navbar } from '../../global/components'
+import { Card, Drawer, Header, Modal, Navbar } from '../../global/components'
 
 /** Style */
 import './EventsPage.scss'
@@ -26,6 +27,7 @@ function EventsPage() {
 
     /** Refs */
     const modalRef = useRef<ModalHandle | null>(null);
+    const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
     const [isLoadingEvents, setIsLoadingEvents] = useState<boolean>(false);
@@ -55,6 +57,10 @@ function EventsPage() {
     /** Methods */
     const onModalToggleClick = (): void => {
         modalRef.current?.open();
+    }
+
+    const onDrawerToggleClick = (): void => {
+        drawerRef.current?.open();
     }
 
     const onInpuChange = (event: ChangeEvent, id: string): void => {
@@ -90,14 +96,21 @@ function EventsPage() {
     /** Node */
     return (
         <div className='page events-page'>
-            <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
-                <span className='filters-icon'></span>
-            </button>
-            <p className='title-s events-title'>Eventi</p>
-            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+            <Header text='Convenzioni' style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'center' }}>
+                <Header.Left>
+                    <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
+                        <span className='filters-toggle__icon'></span>
+                    </button>
+                </Header.Left>
+                <Header.Right>
+                    <button type='button' className='drawer-toggle tertiary' onClick={onDrawerToggleClick}>
+                        <span className='drawer-toggle__icon'></span>
+                    </button>
+                </Header.Right>
+            </Header>
+            <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
-
             {
                 isLoadingEvents ?
                     <p className='events-list__empty'>Caricamento eventi in corso...</p> :

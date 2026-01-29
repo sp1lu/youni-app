@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, useState, type ChangeEvent, type PropsWithChildren } from 'react'
+import { forwardRef, useImperativeHandle, useState, type PropsWithChildren } from 'react'
 
 /** Style */
 import './Modal.scss'

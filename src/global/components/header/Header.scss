@@ -1,0 +1,36 @@
+.header-comp {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--neutral-100, white);
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.header-comp .header-left,
+.header-comp .header-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header-comp .header-left {
+    left: 0;
+}
+
+.header-comp .header-right {
+    right: 0;
+}
+
+.header-comp .header-center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    // text-align: center;
+}
+
+.header-comp .header-center p {
+    width: 100%;
+}

@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -64,7 +64,8 @@ export const router: DataRouter = createBrowserRouter([
                         element: <ProtectedRoute><DiscountPage></DiscountPage></ProtectedRoute>
                     }
                 ]
-            }
+            },
+            { path: 'account', element: <AccountPage /> },
         ]
     }
 ]);

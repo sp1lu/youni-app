@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import EditorJSHTML from 'editorjs-html'
 
@@ -9,13 +9,14 @@ import { useAuth } from '../../features/auth'
 /** Models */
 import { type AppEvent } from '../../features/events'
 import { type City } from '../../features/users'
+import { type DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Services */
 import { getEventById } from '../../features/events'
 import { getAllCities, getCityLabel } from '../../features/users'
 
 /** Components */
-import { Drawer, Navbar } from '../../global/components'
+import { Drawer, Header, Navbar } from '../../global/components'
 
 /** Style */
 import './EventPage.scss'
@@ -27,6 +28,9 @@ function EventPage() {
 
     /** Contexts */
     const { user, logout } = useAuth();
+
+    /** Refs */
+    const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** Memo */
     const editorjsParser = useMemo(() => EditorJSHTML(), []);
@@ -51,28 +55,35 @@ function EventPage() {
             })
     }, []);
 
+    /** Methods */
+    const onDrawerToggleClick = (): void => {
+        drawerRef.current?.open();
+    }
+
+    /** Node */
     return (
         <div className='page event-page'>
+            <Header text={cities && event ? `${getCityLabel(event.city, cities)} ∙ Convenzione` : 'Convenzione'} style={{ fontWeight: 700, textAlign: 'center' }}>
+                <Header.Left>
+                    <Link to='/events'>
+                        <div className='back-btn'>
+                            <span className='back-btn__icon'></span>
+                        </div>
+                    </Link>
+                </Header.Left>
+                <Header.Right>
+                    <button type='button' className='drawer-toggle tertiary' onClick={onDrawerToggleClick}>
+                        <span className='drawer-toggle__icon'></span>
+                    </button>
+                </Header.Right>
+            </Header>
+            <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+            </Drawer>
             {
                 !event ?
                     '' :
                     <div>
-                        <div className='page-header'>
-                            <Link to='/events'>
-                                <div className='back-btn'>
-                                    <span className='back-btn__icon'></span>
-                                </div>
-                            </Link>
-                            <p className='header-title'>
-                                {
-                                    cities ? `${getCityLabel(event.city, cities)} ∙ Evento` : 'Evento'
-                                }
-                            </p>
-                            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
-                            </Drawer>
-                        </div>
-
                         <div className='event-body'>
                             <img src={event.img} alt='Immagine della convenzione' className='event-img' />
                             <div className='event-title-wrapper'>

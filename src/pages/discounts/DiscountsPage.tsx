@@ -1,19 +1,21 @@
 /** Dependencies */
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 
-/** Services */
-import { getAllDiscountCategories, getDiscountCategoryLabel } from '../../global/services'
-
 /** Contexts */
 import { useAuth } from '../../features/auth'
 
 /** Types */
-import { getAllDiscounts, type Discount } from '../../features/discounts'
+import type { Discount } from '../../features/discounts'
 import type { DiscountCategory } from '../../global/types'
 import type { ModalHandle } from '../../global/components/modal/Modal'
+import type { DrawerHandle } from '../../global/components/drawer/Drawer'
+
+/** Services */
+import { getAllDiscountCategories, getDiscountCategoryLabel } from '../../global/services'
+import { getAllDiscounts } from '../../features/discounts'
 
 /** Components */
-import { Card, Drawer, Modal, Navbar } from '../../global/components'
+import { Card, Drawer, Header, Modal, Navbar } from '../../global/components'
 
 /** Style */
 import './DiscountsPage.scss'
@@ -24,6 +26,7 @@ function DiscountsPage() {
 
     /** Refs */
     const modalRef = useRef<ModalHandle | null>(null);
+    const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
     const [isLoadingDiscounts, setIsLoadingDiscounts] = useState<boolean>(false);
@@ -55,6 +58,10 @@ function DiscountsPage() {
     /** Methods */
     const onModalToggleClick = (): void => {
         modalRef.current?.open();
+    }
+
+    const onDrawerToggleClick = (): void => {
+        drawerRef.current?.open();
     }
 
     const onInpuChange = (event: ChangeEvent, id: string): void => {
@@ -90,11 +97,19 @@ function DiscountsPage() {
     /** Node */
     return (
         <div className='page discounts-page'>
-            <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
-                <span className='filters-icon'></span>
-            </button>
-            <p className='title-s discounts-title'>Convenzioni</p>
-            <Drawer toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
+            <Header text='Convenzioni' style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'center' }}>
+                <Header.Left>
+                    <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
+                        <span className='filters-toggle__icon'></span>
+                    </button>
+                </Header.Left>
+                <Header.Right>
+                    <button type='button' className='drawer-toggle tertiary' onClick={onDrawerToggleClick}>
+                        <span className='drawer-toggle__icon'></span>
+                    </button>
+                </Header.Right>
+            </Header>
+            <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
 
