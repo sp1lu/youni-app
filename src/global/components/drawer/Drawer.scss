@@ -9,7 +9,7 @@ $width: 300px;
     width: $width;
     background-color: var(--neutral-100, white);
     transition: right .2s ease-in-out;
-    padding: 40px 4%;
+    padding: 40px 24px;
 }
 
 .drawer--open {
@@ -42,68 +42,10 @@ $width: 300px;
     .drawer {
         right: -100dvw;
         width: 100dvw;
+        padding: 40px 4%;
     }
 
     .drawer--open {
         right: 0;
     }
 }
-
-// .drawer-toggle {
-//     position: absolute;
-//     top: 24px;
-//     right: 24px;
-//     z-index: 3;
-//     background-color: color-mix(in srgb, var(--neutral-100, white) 50%, transparent);
-//     border-radius: var(--border-radius-m);
-// }
-
-// .drawer-content {
-//     position: absolute;
-//     z-index: 2;
-//     height: 100dvh;
-//     background-color: var(--neutral-100);
-//     padding: 64px 24px;
-//     width: 300px;
-//     display: flex;
-//     flex-direction: column;
-//     top: 0;
-//     right: -300px;
-//     transition: right .2s ease-in-out;
-//     border-left: 1px solid var(--neutral-400);
-// }
-
-// .drawer-content--open {
-//     right: 0;
-// }
-
-// .drawer-toggle__input {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 0;
-//     height: 0;
-//     opacity: 0;
-//     visibility: hidden;
-// }
-
-// .drawer-toggle__icon {
-//     cursor: pointer;
-//     display: block;
-//     width: 32px;
-//     height: 32px;
-//     background-color: var(--neutral-900);
-//     mask-position: center;
-//     mask-repeat: no-repeat;
-// }
-
-// @media screen and (max-width: 768px) {
-//     .drawer-content {
-//         right: -100dvw;
-//         width: 100dvw;
-//     }
-
-//     .drawer-content--open {
-//         right: 0;
-//     }
-// }
