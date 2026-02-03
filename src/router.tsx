@@ -11,6 +11,7 @@ import { ProtectedRoute } from './features/auth'
 /** Pages */
 import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
 import PersonalInfoPage from './pages/personal-info/PersonalInfoPage'
+import YouniCardPage from './pages/youni-card/YouniCardPage'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -73,6 +74,10 @@ export const router: DataRouter = createBrowserRouter([
                     {
                         index: true,
                         element: <ProtectedRoute><AccountPage /></ProtectedRoute>
+                    },
+                    {
+                        path: 'youni-card',
+                        element: <ProtectedRoute><YouniCardPage /></ProtectedRoute>
                     },
                     {
                         path: 'personal-info',

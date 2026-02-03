@@ -42,7 +42,7 @@ function AccountPage() {
             </Drawer>
             <div className='account-options'>
                 <div className='account-option'>
-                    <NavLink to='' className='account-option__link'>
+                    <NavLink to='./youni-card' className='account-option__link'>
                         <span className='account-option__icon account-option__icon--qr'></span>
                         <span className='account-option__label'>Youni card</span>
                         <span className='account-option__arrow'></span>
