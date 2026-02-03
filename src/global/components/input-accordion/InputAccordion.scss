@@ -1,0 +1,66 @@
+.input-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid var(--neutral-400, lightgrey);
+    padding: 16px 0;
+}
+
+.input-accordion__first-line {
+    position: relative;
+}
+
+.input-accordion__label,
+.input-accordion__summary {
+    font-weight: 700;
+}
+
+.input-accordion__details[aria-disabled="true"] .input-accordion__summary {
+    pointer-events: none;
+    opacity: .5;
+}
+
+.input-accordion__summary {
+    cursor: pointer;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: underline;
+}
+
+.input-accordion__summary::-webkit-details-marker {
+    display: none;
+}
+
+.input-accordion__input {
+    width: 100%;
+    height: 48px;
+}
+
+.input-accordion__content {
+    gap: 8px;
+}
+
+.input-accordion__desc,
+.input-accordion__value {
+    color: var(--neutral-700, grey);
+}
+
+.input-accordion__desc {
+    margin: 8px 0;
+}
+
+.input-accordion__value {
+    margin: 0;
+}
+
+.input-accordion__form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-accordion__btn {
+    width: 100px;
+}

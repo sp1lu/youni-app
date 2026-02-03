@@ -37,6 +37,16 @@ button.tertiary {
     }
 }
 
+button.alt {
+    color: var(--neutral-100);
+    background-color: var(--neutral-800);
+    border: 1px solid var(--neutral-800);
+
+    &:hover {
+        background-color: var(--neutral-700);
+    }
+}
+
 button.google-btn {
     position: relative;
 

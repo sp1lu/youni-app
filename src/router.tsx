@@ -10,6 +10,7 @@ import { ProtectedRoute } from './features/auth'
 
 /** Pages */
 import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
+import PersonalInfoPage from './pages/personal-info/PersonalInfoPage'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -65,7 +66,20 @@ export const router: DataRouter = createBrowserRouter([
                     }
                 ]
             },
-            { path: 'account', element: <AccountPage /> },
+            {
+                path: 'account',
+                element: <ProtectedRoute><Outlet /></ProtectedRoute>,
+                children: [
+                    {
+                        index: true,
+                        element: <ProtectedRoute><AccountPage /></ProtectedRoute>
+                    },
+                    {
+                        path: 'personal-info',
+                        element: <ProtectedRoute><PersonalInfoPage /></ProtectedRoute>
+                    }
+                ]
+            }
         ]
     }
 ]);

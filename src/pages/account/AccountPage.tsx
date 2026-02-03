@@ -49,7 +49,7 @@ function AccountPage() {
                     </NavLink>
                 </div>
                 <div className='account-option'>
-                    <NavLink to='' className='account-option__link'>
+                    <NavLink to='./personal-info' className='account-option__link'>
                         <span className='account-option__icon account-option__icon--data'></span>
                         <span className='account-option__label'>Dati personali</span>
                         <span className='account-option__arrow'></span>

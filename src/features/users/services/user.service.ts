@@ -2,7 +2,7 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, query, QueryDocumentSnapshot, setDoc, where, type FirestoreDataConverter } from 'firebase/firestore'
 
 /** Types */
-import type { User } from '../types'
+import type { AppUser, User } from '../types'
 
 /** Services */
 import { db } from '../../../global/services'
@@ -20,6 +20,8 @@ export async function addUser(data: User, collectionId: string, converter: Fires
 
 export async function updateUser(data: User, collectionId: string, converter: FirestoreDataConverter<User | null>): Promise<void> {
     const { id, ...user } = data;
+    console.log('UPDATE USER', id, user);
+    
     try {
         const docRef = doc(db, collectionId, id).withConverter(converter);
         await setDoc(docRef, user);
@@ -80,5 +82,24 @@ export async function deleteUserById(id: string): Promise<void> {
         await deleteDoc(doc(db, 'appUsers', id));
     } catch (error) {
         throw new Error('Errore nell\'eliminazione dell\'utente.');
+    }
+}
+
+export const userFormdataConverter = {
+    toFormdata: (user: AppUser): Record<string, any> => {
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            city: user.city
+        }
+    },
+    toUser: (formdata: Record<string, any>): Pick<AppUser, 'firstName' | 'lastName' | 'email' | 'city'> => {
+        return {
+            firstName: formdata['firstName'] ?? '',
+            lastName: formdata['lastName'] ?? '',
+            email: formdata['email'] ?? '',
+            city: formdata['city'] ?? '',
+        }
     }
 }

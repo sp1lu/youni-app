@@ -1,6 +1,7 @@
 export * from './card'
 export * from './drawer'
 export * from './header'
+export * from './input-accordion'
 export * from './modal'
 export * from './navbar'
 export * from './slider'
