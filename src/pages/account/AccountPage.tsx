@@ -56,7 +56,7 @@ function AccountPage() {
                     </NavLink>
                 </div>
                 <div className='account-option'>
-                    <NavLink to='' className='account-option__link'>
+                    <NavLink to='./my-tickets' className='account-option__link'>
                         <span className='account-option__icon account-option__icon--ticket'></span>
                         <span className='account-option__label'>I miei eventi</span>
                         <span className='account-option__arrow'></span>

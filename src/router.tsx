@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, FeedPage, LandingPage, SigninPage, SignupPage, UserTicketsPage } from './pages'
 import PersonalInfoPage from './pages/personal-info/PersonalInfoPage'
 import YouniCardPage from './pages/youni-card/YouniCardPage'
 
@@ -82,6 +82,10 @@ export const router: DataRouter = createBrowserRouter([
                     {
                         path: 'personal-info',
                         element: <ProtectedRoute><PersonalInfoPage /></ProtectedRoute>
+                    },
+                    {
+                        path: 'my-tickets',
+                        element: <ProtectedRoute><UserTicketsPage /></ProtectedRoute>
                     }
                 ]
             }

@@ -1,5 +1,5 @@
 /** Dependencies */
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 
 /** Services */
 import { db } from '../../../global/services'
@@ -12,12 +12,25 @@ export async function getTicketBydId(id: string): Promise<Ticket | null> {
     try {
         const docRef = doc(db, 'tickets', id).withConverter(ticketConverter);
         const docSnap = await getDoc(docRef);
-        const ticket = docSnap.data() ?? null;      
+        const ticket = docSnap.data() ?? null;
         return ticket;
     } catch (error) {
         throw error instanceof Error ?
             error :
             new Error('Errore nel recupero del biglietto.');
+    }
+}
+
+export async function getTicketsByUser(userId: string): Promise<Ticket[]> {
+    try {
+        const docRef = collection(db, 'tickets').withConverter(ticketConverter);
+        const q = query(docRef, where('user', '==', userId));
+        const docSnap = await getDocs(q);
+        return docSnap.docs.map((t) => t.data()).filter((t) => t !== null);
+    } catch (error) {
+        throw error instanceof Error ?
+            error :
+            new Error('Errore nel recupero dei biglietti.');
     }
 }
 
@@ -27,6 +40,6 @@ export async function updateTicket(data: Ticket): Promise<void> {
         const docRef = doc(db, 'tickets', id).withConverter(ticketConverter);
         await setDoc(docRef, ticket);
     } catch (error) {
-        throw new Error(`Errore nel salvataggio del biglietto.`);        
+        throw new Error(`Errore nel salvataggio del biglietto.`);
     }
 }
