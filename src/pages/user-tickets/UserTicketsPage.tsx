@@ -17,6 +17,9 @@ import { getEventById, getTicketsByUser } from '../../features/events'
 /** Components */
 import { Drawer, Header, Navbar } from '../../global/components'
 
+/** Style */
+import './UserTicketsPage.scss'
+
 /** Component */
 function UserTicketsPage() {
     /** Contexts */
@@ -62,7 +65,7 @@ function UserTicketsPage() {
 
     /** Node */
     return (
-        <div className='page'>
+        <div className='page my-tickets-page'>
             <Header text='I miei eventi' style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'center' }}>
                 <Header.Left>
                     <Link to='/account'>
@@ -81,10 +84,13 @@ function UserTicketsPage() {
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
 
-            <div>
+            <div className='tickets-list'>
                 {
-                    appEvents.map((e: AppEvent) => (
-                        <p>{e.title}</p>
+                    appEvents.map((event: AppEvent) => (
+                        <Link to={`./${event.id}`} className='ticket' key={event.id}>
+                            <p className='ticket__title subtitle-xs'>{event.title}</p>
+                            <p className='ticket__date'>{new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' }).format(event.date)}</p>
+                        </Link>
                     ))
                 }
             </div>
