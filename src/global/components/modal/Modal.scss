@@ -19,8 +19,8 @@
 
 .modal-toggle {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 11px;
+    right: 16px;
     z-index: 3;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .modal-header__title-wrapper {
-    padding: 32px 0 16px 0;
+    padding: 16px 0;
     border-bottom: 1px solid var(--neutral-400, lightgrey);
 }
 
