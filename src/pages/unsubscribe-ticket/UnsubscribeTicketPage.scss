@@ -1,0 +1,24 @@
+.unsubscribe-page {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+.unsubscribe-page .unsubscribe-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+}
+
+.unsubscribe-page .unsubscribe {
+    flex: 1;
+}
+
+.unsubscribe-page .confirm {
+    margin-bottom: 16px;
+}
+
+.unsubscribe-page .confirm-btn {
+    width: 100%;
+}

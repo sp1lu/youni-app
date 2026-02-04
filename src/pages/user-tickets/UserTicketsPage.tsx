@@ -86,12 +86,14 @@ function UserTicketsPage() {
 
             <div className='tickets-list'>
                 {
-                    appEvents.map((event: AppEvent) => (
-                        <Link to={`./${event.id}`} className='ticket' key={event.id}>
+                    appEvents.length > 0 ?
+                    appEvents.map((event: AppEvent, i: number) => (
+                        <Link to={`./${tickets[i].id}`} className='ticket' key={event.id}>
                             <p className='ticket__title subtitle-xs'>{event.title}</p>
                             <p className='ticket__date'>{new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' }).format(event.date)}</p>
                         </Link>
-                    ))
+                    )) :
+                    <p className='empty-list'>Non sei ancora registrato a nessun evento!</p>
                 }
             </div>
         </div>

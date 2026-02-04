@@ -1,0 +1,64 @@
+.ticket-page,
+.ticket-page .ticket-page__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-page {
+    min-height: 100dvh;
+}
+
+.ticket-page .ticket-page__content {
+    flex: 1;
+}
+
+.ticket-page .qrcode-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket-page .divider {
+    border-top: 1px solid var(--nautral-400, lightgrey);
+}
+
+.ticket-page .divider--dashed {
+    border-top: 1px dashed var(--nautral-400, lightgrey);
+}
+
+.ticket-page .ticket-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+}
+
+.ticket-page .ticket-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-page .ticket-label,
+.ticket-page .ticket-data {
+    margin: 0;
+}
+
+.ticket-page .ticket-label {
+    color: var(--nautral-700, grey);
+}
+
+.ticket-page .ticket-data {
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.ticket-page .unsubscribe {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.ticket-page .unsubscribe-btn {
+    color: red;
+    text-decoration: none;
+}

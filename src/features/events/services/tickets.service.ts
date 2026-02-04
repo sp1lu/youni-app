@@ -1,5 +1,5 @@
 /** Dependencies */
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 
 /** Services */
 import { db } from '../../../global/services'
@@ -41,5 +41,15 @@ export async function updateTicket(data: Ticket): Promise<void> {
         await setDoc(docRef, ticket);
     } catch (error) {
         throw new Error(`Errore nel salvataggio del biglietto.`);
+    }
+}
+
+export async function deleteTicketById(id: string): Promise<void> {
+    try {
+        const docRef = doc(db, 'tickets', id);
+        await deleteDoc(docRef)
+    } catch (error) {
+        throw new Error(`Errore nella disiscrizione all'evento.`);
+
     }
 }
