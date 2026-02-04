@@ -42,24 +42,27 @@ function FeedPage() {
 
     /** Effects */
     useEffect(() => {
+        if (!user) return;
         getAllCities()
             .then((cities: City[]) => setCities(cities))
             .catch((err: unknown) => err)
-    }, [])
+    }, [user])
 
     useEffect(() => {
+        if (!user) return;
         getAllEvents()
             .then((events: AppEvent[]) => {
-                setEvents(events)
+                setEvents(events.filter((e) => e.city === user.city))
             })
             .catch((err: unknown) => err)
-    }, []);
+    }, [user]);
 
     useEffect(() => {
+        if (!user) return;
         getAllDiscounts()
-            .then((discounts: Discount[]) => setDiscounts(discounts))
+            .then((discounts: Discount[]) => setDiscounts(discounts.filter((d) => d.city === user.city)))
             .catch((err: unknown) => err)
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         if (!user || cities.length === 0) return;
@@ -72,16 +75,18 @@ function FeedPage() {
     }, [cities, user]);
 
     useEffect(() => {
+        if (!user) return;
         getAllEventCategories()
             .then((categories: EventCategory[]) => setEventCategories(categories))
             .catch((err: unknown) => err)
-    }, [])
+    }, [user])
 
     useEffect(() => {
+        if (!user) return;
         getAllDiscountCategories()
             .then((categories: DiscountCategory[]) => setDiscountCategories(categories))
             .catch((err: unknown) => err)
-    }, [])
+    }, [user])
 
     /** Methods */
     const onDrawerToggleClick = (): void => {               

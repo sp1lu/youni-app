@@ -23,7 +23,7 @@ import { FORM_FIELDS } from './form-fields'
 /** Component */
 function PersonalInfoPage() {
     /** Contexts */
-    const { user, logout } = useAuth();
+    const { user, refreshUser, logout } = useAuth();
     const { createSnackbar } = useSnackbars();
 
     /** Refs */
@@ -35,10 +35,6 @@ function PersonalInfoPage() {
     const [cities, setCities] = useState<City[]>([]);
 
     /** Effects */
-    useEffect(() => {
-        console.log(formFields);
-    }, []);
-
     useEffect(() => {
         getAllCities()
             .then((cities: City[]) => {
@@ -71,7 +67,10 @@ function PersonalInfoPage() {
         setFormData(updatedFormData)
 
         updateUser({ ...user, ...userFormdataConverter.toUser(updatedFormData) }, 'appUsers', appUserConverter)
-            .then(() => createSnackbar(`Dati aggiornati con successo.`, 'SUCCESS'))
+            .then(() => {
+                refreshUser();
+                createSnackbar(`Dati aggiornati con successo.`, 'SUCCESS');
+            })
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nell'aggiornamento dei dati dell'utente.`, 'ERROR'))
     }
 

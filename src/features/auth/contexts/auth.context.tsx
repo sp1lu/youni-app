@@ -13,6 +13,7 @@ interface AuthContextValue {
     user: AppUser | null,
     baseUser: Pick<AppUser, 'id' | 'email'> | null,
     loading: boolean,
+    refreshUser: () => Promise<void>,
     createAccountWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
     signInWithGoogle: () => Promise<void>,
@@ -25,6 +26,7 @@ export const AuthContext = createContext<AuthContextValue>({
     user: null,
     baseUser: null,
     loading: true,
+    refreshUser: async () => { },
     createAccountWithEmailAndPassword: async () => { },
     loginWithEmailAndPassword: async () => { },
     signInWithGoogle: async () => { },
@@ -36,6 +38,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<AppUser | null>(null);
     const [baseUser, setBaseUser] = useState<Pick<AppUser, 'id' | 'email'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const refreshUser = async () => {
+        if (!baseUser) return;
+
+        setLoading(true);
+
+        try {
+            const updatedUser = await getUserById(baseUser.id, 'appUsers', appUserConverter);
+            setUser(updatedUser);
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
@@ -59,7 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, baseUser, loading, createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
+        <AuthContext.Provider value={{ user, baseUser, loading, refreshUser, createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple, logout }}>
             {children}
         </AuthContext.Provider>
     )
