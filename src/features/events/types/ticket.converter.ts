@@ -7,10 +7,13 @@ import type { Ticket } from './ticket.interface'
 /** Converter */
 export const ticketConverter = {
     toFirestore: (ticket: Ticket) => {
+        const { id, validatedAt, ...rest } = ticket;
         return {
-            ...ticket,
-            validatedAt: ticket.validatedAt && Timestamp.fromDate(ticket.validatedAt)
-        }
+            ...rest,
+            ...(validatedAt && {
+                validatedAt: Timestamp.fromDate(validatedAt)
+            })
+        };
     },
     fromFirestore: (snapshot: DocumentSnapshot): Ticket | null => {
         const data: DocumentData | undefined = snapshot.data();

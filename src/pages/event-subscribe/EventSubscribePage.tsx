@@ -7,11 +7,11 @@ import { useAuth } from '../../features/auth'
 import { useSnackbars } from '../../features/snackbars'
 
 /** Types */
-import type { AppEvent } from '../../features/events'
+import type { AppEvent, Ticket } from '../../features/events'
 import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Services */
-import { getEventById } from '../../features/events'
+import { addTicket, getEventById } from '../../features/events'
 
 /** Components */
 import { Drawer, Header, Navbar } from '../../global/components'
@@ -52,6 +52,14 @@ function EventSubscribePage() {
     /** Methods */
     const onDrawerToggleClick = (): void => {
         drawerRef.current?.open();
+    }
+
+    const onSubscribeBtnClick = () => {
+        if (!appEvent || !user) return;
+        if (appEvent.price > 0) return;
+        addTicket({ id: '', user: user.id, event: appEvent.id })
+            .then(() => navigate('/account/my-tickets'))
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione del tuo biglietto. Riprovare.`, 'ERROR'))
     }
 
     /** Node */
@@ -98,7 +106,7 @@ function EventSubscribePage() {
                         <p>{appEvent.price === 0 ? 'GRATUITO' : `${appEvent.price.toFixed(2)}€`}</p>
                     </div>
 
-                    <button type='button' className='primary subscribe-event-btn'>
+                    <button type='button' className='primary subscribe-event-btn' onClick={onSubscribeBtnClick}>
                         {
                             appEvent.price === 0 ? 'Conferma partecipazione' : 'Continua con Stripe'
                         }

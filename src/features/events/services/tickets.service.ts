@@ -1,5 +1,5 @@
 /** Dependencies */
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 
 /** Services */
 import { db } from '../../../global/services'
@@ -8,6 +8,22 @@ import { db } from '../../../global/services'
 import { ticketConverter, type Ticket } from '../types'
 
 /** Methods */
+export async function addTicket(data: Ticket): Promise<void> {
+    try {
+        await addDoc(collection(db, 'tickets').withConverter(ticketConverter), {
+            ...data
+        })
+            .catch((err) => {
+                console.log(err);
+                
+                throw new Error('Errore nel salvataggio del biglietto.');
+            })
+        } catch (error) {
+        console.log(error);
+        throw new Error('Errore nel salvataggio del biglietto.');
+    }
+}
+
 export async function getTicketBydId(id: string): Promise<Ticket | null> {
     try {
         const docRef = doc(db, 'tickets', id).withConverter(ticketConverter);
