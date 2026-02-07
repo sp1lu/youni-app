@@ -10,6 +10,21 @@ button {
     height: 48px;
 }
 
+a.primary {
+    text-align: center;
+    text-decoration: none;
+    color: var(--neutral-800, white);
+    border-radius: var(--border-radius-m);
+    background-color: var(--primary-500);
+    border: 1px solid var(--neutral-800);
+    font-weight: 700;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: var(--primary-600);
+    }
+}
+
 button.primary {
     background-color: var(--primary-500);
     border: 1px solid var(--neutral-800);

@@ -122,7 +122,7 @@ function EventPage() {
                                         <p className='event-price'>Gratuito</p> :
                                         <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
                                 }
-                                <button type='button' className='primary'>Partecipa</button>
+                                <Link to='./subscribe' className='button primary'>Partecipa</Link>
                             </div>
                         </div>
                     </div>

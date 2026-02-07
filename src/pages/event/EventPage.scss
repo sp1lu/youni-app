@@ -1,9 +1,5 @@
 @use '@styles/index' as *;
 
-.event-page .event-body {
-    margin: 32px 0;
-}
-
 .event-page .event-img {
     width: 100%;
     object-fit: cover;
@@ -112,9 +108,9 @@
     padding: 8px;
 }
 
-.event-page .event-cta button {
-    height: 100%;
+.event-page .event-cta .button {
     width: 150px;
+    padding: 12px;
 }
 
 .event-page .event-cta .event-price {

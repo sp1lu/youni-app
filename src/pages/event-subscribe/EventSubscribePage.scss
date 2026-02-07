@@ -1,0 +1,57 @@
+.subscribe-event-page,
+.subscribe-event-page .subscribe-event-page-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscribe-event-page {
+    height: 100dvh;
+}
+
+.subscribe-event-page .subscribe-event-page-body {
+    flex: 1;
+}
+
+.subscribe-event-page .event-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-m, 16px);
+}
+
+.subscribe-event-page .event-title-wrapper {
+    margin: 24px 0;
+}
+
+.subscribe-event-page .event-title {
+    text-align: center;
+    margin: 0;
+}
+
+.subscribe-event-page .event-desc {
+    text-align: center;
+    margin: 0;
+    color: var(--neutral-700, grey);
+}
+
+.subscribe-event-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 16px 0;
+}
+
+.subscribe-event-page .price-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subscribe-event-page .total-price {
+    font-weight: 700;
+}
+
+.subscribe-event-page .subscribe-event-btn {
+    margin-top: auto;
+    margin-bottom: 16px;
+}
