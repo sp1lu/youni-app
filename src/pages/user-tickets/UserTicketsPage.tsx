@@ -50,7 +50,7 @@ function UserTicketsPage() {
 
         Promise.all(eventsPromises)
             .then((events: (AppEvent | null)[]) => {
-                setAppEvents(events.filter((e) => e !== null));
+                setAppEvents(events.filter((e) => e !== null).sort((a, b) => b.date.getTime() - a.date.getTime()));
             })
             .catch((err: unknown) => {
                 createSnackbar(err instanceof Error ? err.message : `Errore nel recupero dei tuoi biglietti.`, 'ERROR')
