@@ -7,12 +7,12 @@ import EditorJSHTML from 'editorjs-html'
 import { useAuth } from '../../features/auth'
 
 /** Models */
-import { type AppEvent } from '../../features/events'
-import { type City } from '../../features/users'
-import { type DrawerHandle } from '../../global/components/drawer/Drawer'
+import type { AppEvent, Ticket } from '../../features/events'
+import type { City } from '../../features/users'
+import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Services */
-import { getEventById } from '../../features/events'
+import { getEventById, getTicketsByEvent } from '../../features/events'
 import { getAllCities, getCityLabel } from '../../features/users'
 
 /** Components */
@@ -37,6 +37,7 @@ function EventPage() {
 
     /** State */
     const [event, setEvent] = useState<AppEvent | null>(null);
+    const [tickets, setTickets] = useState<Ticket[]>([]);
     const [cities, setCities] = useState<City[]>([]);
 
     /** Effects */
@@ -46,14 +47,22 @@ function EventPage() {
             .then((event: AppEvent | null) => {
                 setEvent(event);
             })
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         getAllCities()
             .then((cities: City[]) => {
                 setCities(cities);
             })
-    }, []);
+    }, [id]);
+
+    useEffect(() => {
+        if (!event) return;
+        getTicketsByEvent(event.id)
+            .then((tickets: Ticket[]) => {
+                setTickets(tickets)
+            })
+    }, [event])
 
     /** Methods */
     const onDrawerToggleClick = (): void => {
@@ -116,14 +125,18 @@ function EventPage() {
                                 <iframe src={`https://www.youtube.com/embed/${event.video}`} className='video' title={event.title} allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>
                             </div>
 
-                            <div className='event-cta'>
-                                {
-                                    event.price === 0 ?
-                                        <p className='event-price'>Gratuito</p> :
-                                        <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
-                                }
-                                <Link to='./subscribe' className='button primary'>Partecipa</Link>
-                            </div>
+                            {
+                                tickets.length < event.maxSeats ?
+                                    <div className='event-cta'>
+                                        {
+                                            event.price === 0 ?
+                                                <p className='event-price'>Gratuito</p> :
+                                                <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
+                                        }
+                                        <Link to='./subscribe' className='button primary'>Partecipa</Link>
+                                    </div> :
+                                    <div className='event-cta'><p className='event-price event-price--soldout'>Ops, pare che i posti siano esauriti</p></div>
+                            }
                         </div>
                     </div>
             }

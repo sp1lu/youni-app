@@ -1,5 +1,5 @@
 /** Dependencies */
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, QueryDocumentSnapshot, setDoc, where } from 'firebase/firestore'
 
 /** Services */
 import { db } from '../../../global/services'
@@ -13,11 +13,28 @@ export async function addTicket(data: Ticket): Promise<string> {
         const docRef = await addDoc(
             collection(db, 'tickets').withConverter(ticketConverter),
             { ...data }
-        );        
+        );
         return docRef.id;
     } catch (error) {
         throw new Error('Errore nel salvataggio del biglietto.');
     }
+}
+
+export async function getTicketsByEvent(eventId: string): Promise <Ticket[]> {
+    const q = query(collection(db, 'tickets'), where('event', '==', eventId)).withConverter(ticketConverter);
+    const tickets: Ticket[] = [];
+
+    try {
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc: QueryDocumentSnapshot<Ticket | null>) => {
+            const e: Ticket | null = doc.data();
+            if (e) tickets.push(e);
+        })
+    } catch(error) {
+        throw new Error('Errore nel recupero degi biglietti.');
+    }
+    
+        return tickets;
 }
 
 export async function getTicketBydId(id: string): Promise<Ticket | null> {

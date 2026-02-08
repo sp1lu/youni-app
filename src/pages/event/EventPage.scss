@@ -105,7 +105,7 @@
     background-color: var(--neutral-100, white);
     border: 1px solid var(--neutral-400, lightgrey);
     border-radius: var(--border-radius-m, 16px);
-    padding: 8px;
+    padding: 8px 8px 8px 16px;
 }
 
 .event-page .event-cta .button {
@@ -116,6 +116,11 @@
 .event-page .event-cta .event-price {
     font-size: 1.25rem;
     font-weight: 700;
+}
+
+.event-page .event-cta .event-price--soldout {
+    text-align: center;
+    width: 100%;
 }
 
 .event-page .event-cta .event-price--person {
