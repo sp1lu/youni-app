@@ -23,7 +23,6 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
     /** intercetta il prompt */
     useEffect(() => {
         const handler = (e: Event) => {
-            console.log(e);            
             e.preventDefault();
             setDeferredPrompt(e as Event);
             setCanInstall(true);
@@ -54,7 +53,7 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     /** trigger install */
-    const downloadPWA = async () => {        
+    const downloadPWA = async () => {
         if (!deferredPrompt) return;
         (deferredPrompt as any).prompt();
         await (deferredPrompt as any).userChoice;

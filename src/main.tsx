@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router'
 
 /** Providers */
 import { AuthProvider } from './features/auth/contexts/auth.context.tsx'
-import { PWABanner, PWAProvider } from './features/pwa/index.ts'
+import { PWAProvider } from './features/pwa/index.ts'
 import { SnackbarProvider } from './features/snackbars/index.ts'
 
 /** Components */
@@ -21,7 +21,6 @@ createRoot(document.getElementById('root')!).render(
   <AuthProvider>
     <PWAProvider>
       <SnackbarProvider>
-        <PWABanner />
         <SnackbarContainer />
         <RouterProvider router={router} />
       </SnackbarProvider>
