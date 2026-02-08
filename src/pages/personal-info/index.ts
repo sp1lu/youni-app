@@ -1,1 +1,1 @@
-export * from './PersonalInfoPage'
+export { default as PersonalInfoPage } from './PersonalInfoPage'

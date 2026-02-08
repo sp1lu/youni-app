@@ -1,1 +1,1 @@
-export { default as QRCodePage } from './YouniCardPage'
+export { default as YouniCardPage } from './YouniCardPage'

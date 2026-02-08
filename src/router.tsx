@@ -9,10 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, FeedPage, LandingPage, SigninPage, SignupPage, UnsubscribeTicketPage, UserTicketsPage } from './pages'
-import PersonalInfoPage from './pages/personal-info/PersonalInfoPage'
-import YouniCardPage from './pages/youni-card/YouniCardPage'
-import { TicketPage } from './pages/ticket'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, SigninPage, SignupPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createBrowserRouter([
@@ -58,6 +55,10 @@ export const router: DataRouter = createBrowserRouter([
                             {
                                 path: 'subscribe',
                                 element: <ProtectedRoute><EventSubscribePage /></ProtectedRoute>
+                            },
+                            {
+                                path: 'success',
+                                element: <ProtectedRoute><EventSubscribeSuccessPage /></ProtectedRoute>
                             }
                         ]
                     }

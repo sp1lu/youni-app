@@ -1,0 +1,81 @@
+@use '@styles/index' as *;
+
+.subscribe-event-success-page {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.subscribe-event-success-page .subscribe-event-success-page-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.subscribe-event-success-page .subscribe-event-success-infos {
+    padding: 24px 0 0 0;
+    flex: 1;
+}
+
+.subscribe-event-success-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 32px 0;
+}
+
+.subscribe-event-success-page .confirmed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.subscribe-event-success-page .confirm__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xl, 100px);
+    background-color: var(--primary-400, green);
+    height: 48px;
+    width: 48px;
+}
+
+.subscribe-event-success-page .confirmed__icon {
+    @include masked-icon('/icons/check_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-100, white));
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.subscribe-event-success-page .confirmed__texts {
+    text-align: center;
+}
+
+.subscribe-event-success-page .confirmed__title,
+.subscribe-event-success-page .confirmed__msg,
+.subscribe-event-success-page .event-info__title,
+.subscribe-event-success-page .event-info__date {
+    margin: 0;
+}
+
+.subscribe-event-success-page .event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscribe-event-success-page .event-info__date {
+    color: var(--neutral-600, grey);
+}
+
+.subscribe-event-success-page .subscribe-event-success-cta {
+    margin: 0 0 16px 0;
+    width: 100%;
+}
+
+.subscribe-event-success-page .subscribe-event-success-cta .button {
+    padding: 12px;
+    display: inline-block;
+    width: 100%;
+}

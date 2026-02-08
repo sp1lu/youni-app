@@ -19,8 +19,9 @@ a.primary {
     border: 1px solid var(--neutral-800);
     font-weight: 700;
     font-size: 1rem;
-
+    
     &:hover {
+        color: var(--neutral-800, white);
         background-color: var(--primary-600);
     }
 }

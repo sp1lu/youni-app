@@ -7,7 +7,7 @@ import { useAuth } from '../../features/auth'
 import { useSnackbars } from '../../features/snackbars'
 
 /** Types */
-import type { AppEvent, Ticket } from '../../features/events'
+import type { AppEvent } from '../../features/events'
 import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Services */
@@ -58,7 +58,7 @@ function EventSubscribePage() {
         if (!appEvent || !user) return;
         if (appEvent.price > 0) return;
         addTicket({ id: '', user: user.id, event: appEvent.id })
-            .then(() => navigate('/account/my-tickets'))
+            .then((ticketId: string) => navigate('../success', { state: { ticketId } }))
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione del tuo biglietto. Riprovare.`, 'ERROR'))
     }
 

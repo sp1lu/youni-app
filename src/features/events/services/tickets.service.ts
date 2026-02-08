@@ -8,18 +8,14 @@ import { db } from '../../../global/services'
 import { ticketConverter, type Ticket } from '../types'
 
 /** Methods */
-export async function addTicket(data: Ticket): Promise<void> {
+export async function addTicket(data: Ticket): Promise<string> {
     try {
-        await addDoc(collection(db, 'tickets').withConverter(ticketConverter), {
-            ...data
-        })
-            .catch((err) => {
-                console.log(err);
-                
-                throw new Error('Errore nel salvataggio del biglietto.');
-            })
-        } catch (error) {
-        console.log(error);
+        const docRef = await addDoc(
+            collection(db, 'tickets').withConverter(ticketConverter),
+            { ...data }
+        );        
+        return docRef.id;
+    } catch (error) {
         throw new Error('Errore nel salvataggio del biglietto.');
     }
 }
