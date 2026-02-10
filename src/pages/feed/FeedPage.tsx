@@ -19,8 +19,8 @@ import { useAuth } from '../../features/auth'
 import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 
 /** Componenents */
-import { Card, Drawer, Header, Navbar, Slider } from '../../global/components'
 import { PWABanner } from '../../features/pwa'
+import { Card, Drawer, Header, Navbar, Slider } from '../../global/components'
 
 /** Style */
 import './FeedPage.scss'
@@ -106,64 +106,73 @@ function FeedPage() {
             <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
-            <div className='feed-section'>
-                <NavLink to='/events' className='subtitle-xs section-title'>Eventi<span className='title-icon'></span></NavLink>
-                <Slider>
-                    {
-                        events.map((e: AppEvent) => (
-                            <Card key={e.id}
-                                uid={e.id}
-                                img={e.img}
-                                text={e.title}
-                                desc={formatDate(e.date)}
-                                path='events'
-                                chip={
-                                    (() => {
-                                        const id = e.categories[0];
-                                        return id ? getEventCategoryLabel(id, eventCategories) : id;
-                                    })()
-                                }
-                            />
-                        ))
-                    }
-                </Slider>
-            </div>
+            {
+                events.length > 0 &&
+                <div className='feed-section'>
+                    <NavLink to='/events' className='subtitle-xs section-title'>Eventi<span className='title-icon'></span></NavLink>
+                    <Slider>
+                        {
+                            events.map((e: AppEvent) => (
+                                <Card key={e.id}
+                                    uid={e.id}
+                                    img={e.img}
+                                    text={e.title}
+                                    desc={formatDate(e.date)}
+                                    path='events'
+                                    chip={
+                                        (() => {
+                                            const id = e.categories[0];
+                                            return id ? getEventCategoryLabel(id, eventCategories) : id;
+                                        })()
+                                    }
+                                />
+                            ))
+                        }
+                    </Slider>
+                </div>
+            }
 
-            <div className='feed-section'>
-                <NavLink to='/discounts' className='subtitle-xs section-title'>Convenzioni<span className='title-icon'></span></NavLink>
-                <Slider>
-                    {
-                        discounts.map((d: Discount) => (
-                            <Card key={d.id}
-                                uid={d.id}
-                                img={d.img}
-                                text={d.title}
-                                desc={d.discount}
-                                backgroundColor={d.color}
-                                objectFit='contain'
-                                path='discounts'
-                                chip={
-                                    (() => {
-                                        const id = d.categories[0];
-                                        return id ? getDiscountCategoryLabel(id, discountCategories) : id;
-                                    })()
-                                }
-                            />
-                        ))
-                    }
-                </Slider>
-            </div>
+            {
+                discounts.length > 0 &&
+                <div className='feed-section'>
+                    <NavLink to='/discounts' className='subtitle-xs section-title'>Convenzioni<span className='title-icon'></span></NavLink>
+                    <Slider>
+                        {
+                            discounts.map((d: Discount) => (
+                                <Card key={d.id}
+                                    uid={d.id}
+                                    img={d.img}
+                                    text={d.title}
+                                    desc={d.discount}
+                                    backgroundColor={d.color}
+                                    objectFit='contain'
+                                    path='discounts'
+                                    chip={
+                                        (() => {
+                                            const id = d.categories[0];
+                                            return id ? getDiscountCategoryLabel(id, discountCategories) : id;
+                                        })()
+                                    }
+                                />
+                            ))
+                        }
+                    </Slider>
+                </div>
+            }
 
-            <div className='feed-section'>
-                <NavLink to='/' className='subtitle-xs section-title'>News<span className='title-icon'></span></NavLink>
-                <Slider>
-                    {
-                        posts.map((p: Post) => (
-                            <Card key={p.id} uid={p.id} img={p.img} text={p.title} desc='' url={p.url} />
-                        ))
-                    }
-                </Slider>
-            </div>
+            {
+                posts.length > 0 &&
+                <div className='feed-section'>
+                    <a href='https://youni.life/category/blog' target='_blank' className='subtitle-xs section-title'>News<span className='title-icon'></span></a>
+                    <Slider>
+                        {
+                            posts.map((p: Post) => (
+                                <Card key={p.id} uid={p.id} img={p.img} text={p.title} desc='' url={p.url} />
+                            ))
+                        }
+                    </Slider>
+                </div>
+            }
         </div>
     )
 }

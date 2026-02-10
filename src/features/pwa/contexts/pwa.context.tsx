@@ -37,20 +37,21 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
 
     /** rileva se già installata */
     useEffect(() => {
-        const checkInstalled = () => {
-            const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                // @ts-expect-error iOS
-                window.navigator.standalone === true;
-            setIsInstalled(isStandalone);
-        }
+        const isStandalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            // @ts-expect-error iOS
+            window.navigator.standalone === true;
 
-        checkInstalled();
-        window.addEventListener('appinstalled', checkInstalled);
+        setIsInstalled(isStandalone);
+    }, []);
 
-        return () => {
-            window.removeEventListener('appinstalled', checkInstalled);
-        }
-    }, [])
+    useEffect(() => {
+        const onAppInstalled = () => setIsInstalled(true);
+        window.addEventListener('appinstalled', onAppInstalled);
+        return () => window.removeEventListener('appinstalled', onAppInstalled);
+
+    }, []);
+
 
     /** trigger install */
     const downloadPWA = async () => {
