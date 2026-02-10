@@ -10,6 +10,18 @@
     width: 100%;
 }
 
+.login-page .login__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 64px 0;
+}
+
+.login-page .login__logo img {
+    max-width: 148px;
+    text-align: center;
+}
+
 .login-page .login__title {
     margin: 0 0 48px 0;
 }
