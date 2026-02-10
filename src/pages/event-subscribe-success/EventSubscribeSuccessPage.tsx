@@ -8,6 +8,7 @@ import type { AppEvent, Ticket } from '../../features/events'
 import { getEventById, getTicketBydId } from '../../features/events'
 
 /** Components */
+import { PWABanner } from '../../features/pwa'
 import { Header } from '../../global/components'
 
 /** Style */
@@ -43,6 +44,7 @@ function EventSubscribeSuccessPage() {
     return (
         <div className='page subscribe-event-success-page'>
             <Header text='Conferma partecipazione' style={{ fontWeight: 700, textAlign: 'center' }}></Header>
+            <PWABanner />
             {
                 event &&
                 <div className='subscribe-event-success-page-body'>

@@ -13,7 +13,7 @@ function PWABanner() {
     return (
         !isInstalled &&
         <div className='pwabanner'>
-            <button type='button' className='pwa-btn' onClick={downloadPWA}>Installa Youni come app</button>
+            <button type='button' className='primary pwa-btn' onClick={downloadPWA}>Installa Youni come app</button>
         </div>
     )
 }

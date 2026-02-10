@@ -15,6 +15,7 @@ import { getAllDiscountCategories, getDiscountCategoryLabel } from '../../global
 import { getAllDiscounts } from '../../features/discounts'
 
 /** Components */
+import { PWABanner } from '../../features/pwa'
 import { Card, Drawer, Header, Modal, Navbar } from '../../global/components'
 
 /** Style */
@@ -109,6 +110,7 @@ function DiscountsPage() {
                     </button>
                 </Header.Right>
             </Header>
+            <PWABanner />
             <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
                 <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
             </Drawer>
