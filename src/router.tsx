@@ -1,5 +1,5 @@
 /** Dependencies */
-import { createBrowserRouter, Outlet, Navigate, type DataRouter, createHashRouter } from 'react-router'
+import { Outlet, Navigate, type DataRouter, createHashRouter } from 'react-router'
 
 /** Services */
 import { getAllCities } from './features/users/services'
