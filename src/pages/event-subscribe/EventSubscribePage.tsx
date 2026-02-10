@@ -38,6 +38,7 @@ function EventSubscribePage() {
     /** State */
     const [appEvent, setAppEvent] = useState<AppEvent | null>(null);
     const [tickets, setTickets] = useState<Ticket[]>([]);
+    const [isUserEnrolled, setIsUserEnrolled] = useState<boolean>(false);
 
     /** Effects */
     useEffect(() => {
@@ -55,6 +56,8 @@ function EventSubscribePage() {
         getTicketsByEvent(appEvent.id)
             .then((tickets: Ticket[]) => {
                 setTickets(tickets)
+                const foundTicket = tickets.find((t) => t.user === user?.id);
+                setIsUserEnrolled(foundTicket ? true : false);
             })
     }, [appEvent])
 
@@ -66,7 +69,11 @@ function EventSubscribePage() {
     const onSubscribeBtnClick = () => {
         if (!appEvent || !user) return;
         if (appEvent.price > 0) return;
-        if (tickets.length < appEvent.maxSeats) {
+        if (isUserEnrolled) {
+            createSnackbar(`Sei già iscritto a questo evento!`, 'ERROR');
+            return;
+        }
+        if (tickets.length > appEvent.maxSeats) {
             createSnackbar(`Ops, sembra che nel frattempo i posti siano esauriti!`, 'ERROR');
             return;
         }
@@ -122,13 +129,13 @@ function EventSubscribePage() {
 
                     {
                         tickets.length < appEvent.maxSeats ?
-                        <button type='button' className='primary subscribe-event-btn' onClick={onSubscribeBtnClick}>
-                            {
-                                appEvent.price === 0 ? 'Conferma partecipazione' : 'Continua con Stripe'
-                            }
-                        </button>
-                        : 
-                        <button type='button' className='primary subscribe-event-btn' disabled>Ops, posti esauriti!</button>
+                            <button type='button' className='primary subscribe-event-btn' onClick={onSubscribeBtnClick}>
+                                {
+                                    appEvent.price === 0 ? 'Conferma partecipazione' : 'Continua con Stripe'
+                                }
+                            </button>
+                            :
+                            <button type='button' className='primary subscribe-event-btn' disabled>Ops, posti esauriti!</button>
                     }
                 </div>
             }

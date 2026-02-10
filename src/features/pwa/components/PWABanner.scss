@@ -1,3 +1,27 @@
+.pwabanner {
+    margin: 0 0 32px 0;
+}
+
 .pwabanner .pwa-btn {
+    position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 40px;
+}
+
+.pwabanner .download-icon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    display: block;
+    transform: translateY(-50%);
+    mask-image: url('../../../../public/icons/download_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg');
+    background-color: black;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    height: 16px;
+    width: 16px;
 }

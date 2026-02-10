@@ -45,14 +45,14 @@ function EventsPage() {
                 setEvents(events.filter((e) => e.city === user?.city))
                 setFilteredEvents(events.filter((e) => e.city === user?.city))
             })
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
             .finally(() => setIsLoadingEvents(false));
     }, [])
 
     useEffect(() => {
         getAllEventCategories()
             .then((categories: EventCategory[]) => setEventCategories(categories))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [])
 
     /** Methods */

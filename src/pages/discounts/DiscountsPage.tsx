@@ -46,14 +46,14 @@ function DiscountsPage() {
                 console.log(discounts);
 
             })
-            .catch((err: unknown) => err)
-            .finally(() => setIsLoadingDiscounts(false));
+            .catch((err: unknown) => console.log(err))
+            .finally(() => setIsLoadingDiscounts(false))
     }, [])
 
     useEffect(() => {
         getAllDiscountCategories()
             .then((categories: DiscountCategory[]) => setDiscountsCategories(categories))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [])
 
     /** Methods */

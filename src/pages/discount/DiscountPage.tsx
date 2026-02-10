@@ -44,16 +44,12 @@ function DiscountPage() {
     useEffect(() => {
         if (!id) return;
         getDiscountById(id)
-            .then((discount: Discount | null) => {
-                setDiscount(discount);
-            })
+            .then((discount: Discount | null) => setDiscount(discount))
     }, []);
 
     useEffect(() => {
         getAllCities()
-            .then((cities: City[]) => {
-                setCities(cities);
-            })
+            .then((cities: City[]) => setCities(cities))
     }, []);
 
     /** Methods */

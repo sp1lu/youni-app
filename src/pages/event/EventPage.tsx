@@ -40,21 +40,18 @@ function EventPage() {
     const [event, setEvent] = useState<AppEvent | null>(null);
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [cities, setCities] = useState<City[]>([]);
+    const [isUserEnrolled, setIsUserEnrolled] = useState<boolean>(false);
 
     /** Effects */
     useEffect(() => {
         if (!id) return;
         getEventById(id)
-            .then((event: AppEvent | null) => {
-                setEvent(event);
-            })
+            .then((event: AppEvent | null) => setEvent(event))
     }, [id]);
 
     useEffect(() => {
         getAllCities()
-            .then((cities: City[]) => {
-                setCities(cities);
-            })
+            .then((cities: City[]) => setCities(cities))
     }, [id]);
 
     useEffect(() => {
@@ -62,6 +59,8 @@ function EventPage() {
         getTicketsByEvent(event.id)
             .then((tickets: Ticket[]) => {
                 setTickets(tickets)
+                const foundTicket = tickets.find((t) => t.user === user?.id);
+                setIsUserEnrolled(foundTicket ? true : false);
             })
     }, [event])
 
@@ -73,7 +72,7 @@ function EventPage() {
     /** Node */
     return (
         <div className='page event-page'>
-            <Header text={cities && event ? `${getCityLabel(event.city, cities)} ∙ Convenzione` : 'Convenzione'} style={{ fontWeight: 700, textAlign: 'center' }}>
+            <Header text={cities && event ? `${getCityLabel(event.city, cities)} ∙ Evento` : 'Evento'} style={{ fontWeight: 700, textAlign: 'center' }}>
                 <Header.Left>
                     <Link to='/events'>
                         <div className='back-btn'>
@@ -128,16 +127,18 @@ function EventPage() {
                             </div>
 
                             {
-                                tickets.length < event.maxSeats ?
-                                    <div className='event-cta'>
-                                        {
-                                            event.price === 0 ?
-                                                <p className='event-price'>Gratuito</p> :
-                                                <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
-                                        }
-                                        <Link to='./subscribe' className='button primary'>Partecipa</Link>
-                                    </div> :
-                                    <div className='event-cta'><p className='event-price event-price--soldout'>Ops, pare che i posti siano esauriti</p></div>
+                                isUserEnrolled ?
+                                    <div className='event-cta'><p className='event-price event-price--soldout'>Sei già registrato a questo evento</p></div> :
+                                    tickets.length < event.maxSeats ?
+                                        <div className='event-cta'>
+                                            {
+                                                event.price === 0 ?
+                                                    <p className='event-price'>Gratuito</p> :
+                                                    <p className='event-price'>Da {event.price.toFixed(2)}€ <span className='event-price--person'>/ a testa</span></p>
+                                            }
+                                            <Link to='./subscribe' className='button primary'>Partecipa</Link>
+                                        </div> :
+                                        <div className='event-cta'><p className='event-price event-price--soldout'>Ops, pare che i posti siano esauriti</p></div>
                             }
                         </div>
                     </div>

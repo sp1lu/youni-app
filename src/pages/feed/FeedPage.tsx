@@ -46,23 +46,21 @@ function FeedPage() {
         if (!user) return;
         getAllCities()
             .then((cities: City[]) => setCities(cities))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [user])
 
     useEffect(() => {
         if (!user) return;
         getAllEvents()
-            .then((events: AppEvent[]) => {
-                setEvents(events.filter((e) => e.city === user.city))
-            })
-            .catch((err: unknown) => err)
+            .then((events: AppEvent[]) => setEvents(events.filter((e) => e.city === user.city)))
+            .catch((err: unknown) => console.log(err))
     }, [user]);
 
     useEffect(() => {
         if (!user) return;
         getAllDiscounts()
             .then((discounts: Discount[]) => setDiscounts(discounts.filter((d) => d.city === user.city)))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [user]);
 
     useEffect(() => {
@@ -72,25 +70,25 @@ function FeedPage() {
 
         getAllPosts(city.url)
             .then((posts: Post[]) => setPosts(posts))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [cities, user]);
 
     useEffect(() => {
         if (!user) return;
         getAllEventCategories()
             .then((categories: EventCategory[]) => setEventCategories(categories))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [user])
 
     useEffect(() => {
         if (!user) return;
         getAllDiscountCategories()
             .then((categories: DiscountCategory[]) => setDiscountCategories(categories))
-            .catch((err: unknown) => err)
+            .catch((err: unknown) => console.log(err))
     }, [user])
 
     /** Methods */
-    const onDrawerToggleClick = (): void => {               
+    const onDrawerToggleClick = (): void => {
         drawerRef.current?.open();
     }
 
