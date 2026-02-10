@@ -6,7 +6,7 @@
 }
 
 .page .drawer-toggle__icon {
-    @include icons.masked-icon('/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include icons.masked-icon('/../../../../public/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
     display: flex;
     align-items: center;
     justify-content: center;

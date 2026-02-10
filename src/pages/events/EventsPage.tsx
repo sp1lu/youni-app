@@ -97,7 +97,7 @@ function EventsPage() {
     /** Node */
     return (
         <div className='page events-page'>
-            <Header text='Convenzioni' style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'center' }}>
+            <Header text='Eventi' style={{ fontSize: '1.5rem', fontWeight: 800, textAlign: 'center' }}>
                 <Header.Left>
                     <button type='button' className='button tertiary filters-toggle' onClick={onModalToggleClick}>
                         <span className='filters-toggle__icon'></span>
