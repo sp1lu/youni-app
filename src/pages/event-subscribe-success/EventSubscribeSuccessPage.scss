@@ -42,7 +42,7 @@
 }
 
 .subscribe-event-success-page .confirmed__icon {
-    @include masked-icon('../../../../public/icons/check_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-100, white));
+    @include masked-icon('/icons/check_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-100, white));
     display: inline-block;
     height: 24px;
     width: 24px;

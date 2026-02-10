@@ -17,5 +17,5 @@
 
 .feed-page .title-icon {
     display: inline-block;
-    @include masked-icon('/../../../../public/icons/chevron_right_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/chevron_right_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }

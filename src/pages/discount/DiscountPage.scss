@@ -48,15 +48,15 @@
 }
 
 .discount-page .discount-contact__email-icon {
-    @include masked-icon('/../../../../public/icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .discount-page .discount-contact__phone-icon {
-    @include masked-icon('/../../../../public/icons/call_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/call_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .discount-page .discount-contact__address-icon {
-    @include masked-icon('/../../../../public/icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .discount-page .discount-contact__icon {

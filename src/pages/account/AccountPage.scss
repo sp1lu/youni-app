@@ -28,15 +28,15 @@
 }
 
 .account-page .account-option__icon--qr {
-    @include masked-icon('../../../../public/icons/qr_code_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('/icons/qr_code_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .account-page .account-option__icon--data {
-    @include masked-icon('../../../../public/icons/person_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('/icons/person_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .account-page .account-option__icon--ticket {
-    @include masked-icon('../../../../public/icons/local_activity_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('/icons/local_activity_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .account-page .account-option__icon {

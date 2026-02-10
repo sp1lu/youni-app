@@ -61,11 +61,11 @@
 }
 
 .event-page .event-info__time-icon {
-    @include masked-icon('/../../../../public/icons/calendar_today_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/calendar_today_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .event-page .event-info__address-icon {
-    @include masked-icon('/../../../../public/icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
+    @include masked-icon('//icons/location_on_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-800, black));
 }
 
 .event-page .event-info__icon {
