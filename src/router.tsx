@@ -1,5 +1,5 @@
 /** Dependencies */
-import { createBrowserRouter, Outlet, Navigate, type DataRouter } from 'react-router'
+import { createBrowserRouter, Outlet, Navigate, type DataRouter, createHashRouter } from 'react-router'
 
 /** Services */
 import { getAllCities } from './features/users/services'
@@ -12,7 +12,7 @@ import { ProtectedRoute } from './features/auth'
 import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, SigninPage, SignupPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage } from './pages'
 
 /** Router */
-export const router: DataRouter = createBrowserRouter([
+export const router: DataRouter = createHashRouter([
     {
         path: '/',
         element: <App />,
