@@ -11,6 +11,10 @@ type ProtectedRouteProps = PropsWithChildren<{
     allowedRoles?: UserRole[];
 }>
 
+/** Styles */
+import './ProtectedRoute.scss'
+
+/** Component */
 function ProtectedRoute(props: ProtectedRouteProps) {
     const { allowedRoles, children } = props;
 
@@ -27,12 +31,14 @@ function ProtectedRoute(props: ProtectedRouteProps) {
         else if (allowedRoles && !allowedRoles.includes(user.role)) navigate('/')
     }, [baseUser, user, loading]);
 
-    if (loading) return (
-        <div className='protected-route'>
-            <span className='spinner'></span>
-            <p>Autenticazione in corso...</p>
-        </div>
-    )
+    if (loading) {
+        return (
+            <div className='protected-route'>
+                <span className='spinner'></span>
+                <p>Autenticazione in corso...</p>
+            </div>
+        )
+    }
 
     /** Node */
     return (

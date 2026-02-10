@@ -39,6 +39,12 @@
     height: 100%;
 }
 
+.card__img--fallback {
+    width: 200px;
+    height: 100%;
+    background-color: #F7F7F7;
+}
+
 .card__text,
 .card__desc {
     line-height: 1.25rem;

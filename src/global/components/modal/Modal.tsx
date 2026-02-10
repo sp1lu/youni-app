@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState, type PropsWithChildren } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useState, type PropsWithChildren } from 'react'
 
 /** Style */
 import './Modal.scss'
@@ -30,6 +30,11 @@ const Modal = forwardRef<ModalHandle, ModalProps>((props, ref) => {
     /** State */
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    /** Effects */
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }, [isOpen]);
+
     /** Methods */
     const onBtnClick = () => {
         setIsOpen(false);
@@ -43,13 +48,13 @@ const Modal = forwardRef<ModalHandle, ModalProps>((props, ref) => {
                     <span className='modal-toggle__icon' style={{ maskImage: `url(${closeIcon})` }}></span>
                 </button>
             </label>
-            <div className='modal-header'>
-                <div className='modal-header__title-wrapper'>
-                    <p>{title}</p>
+            <div className='modal-wrapper'>
+                <div className='modal-header'>
+                    <div className='modal-header__title-wrapper'>
+                        <p>{title}</p>
+                    </div>
                 </div>
-            </div>
-            <div className='modal-content'>
-                {children}
+                <div className='modal-content'>{children}</div>
             </div>
         </div>
     )

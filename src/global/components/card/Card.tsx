@@ -48,9 +48,15 @@ function Card(props: CardProps) {
     return (
         <div className='card'>
             <Wrapper>
-                <p className='card__chip'>{chip}</p>
-                <div className='card__img-wrapper' style={{ backgroundColor, display: img.length === 0 ? 'none' : 'block' }}>
-                    <img src={img} className='card__img' loading='lazy' style={{ objectFit: objectFit ?? 'cover' }} />
+                {
+                    (chip && chip.length > 0) && <p className='card__chip'>{chip}</p>
+                }
+                <div className='card__img-wrapper' style={{ backgroundColor }}>
+                    {
+                        img.length > 0 ?
+                            <img src={img} className='card__img' loading='lazy' style={{ objectFit: objectFit ?? 'cover' }} /> :
+                            <div className='card__img--fallback' style={{ backgroundColor }}></div>
+                    }
                 </div>
                 <p className='card__text fw-700'>{text}</p>
                 <p className='card__desc reset-margin'>{desc}</p>
