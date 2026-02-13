@@ -1,48 +1,100 @@
 {
-"name": "Youni",
-"short_name": "This name will show in your Windows taskbar, in the start menu, and Android homescreen",
-"start_url": "/",
-"display": "standalone",
-"description": "A description for your application",
-"lang": " The default language of your application",
-"dir": "auto",
-"theme_color": "#000000",
-"background_color": "#000000",
-"orientation": "any",
-"icons": [
-    {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "maskable"
-    },
-    {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
-        "sizes": "192x192",
-        "type": "image/png",
-        "purpose": "any"
-    }
-],
-"screenshots": [
-    {
-        "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
-        "sizes": "2880x1800",
-        "type": "image/png",
-        "description": "A screenshot of the home page"
-    }
-],
-"related_applications": [
-    {
-        "platform":"windows",
-        "url": " The URL to your app in that app store"
-    }
-],
-"prefer_related_applications": false,
-"shortcuts": [
-    {
-        "name":"The name you would like to be displayed for your shortcut",
-        "url":"The url you would like to open when the user chooses this shortcut. This must be a URL local to your PWA. For example: If my start_url is /, this URL must be something like /shortcut",
-        "description":"A description of the functionality of this shortcut"
-    }
-]
+    "name": "Youni Life | rendiamo facile la vita in Università",
+    "short_name": "Youni",
+    "start_url": "/",
+    "display": "standalone",
+    "description": "Youni Life è un Community dove gli studenti universitari possono trovare servizi a loro dedicati.",
+    "lang": "it",
+    "dir": "ltr",
+    "theme_color": "#00F261",
+    "background_color": "#FFFFFF",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/pwa/icon-48x48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshots/mobile-feed",
+            "sizes": "458x915",
+            "type": "image/png",
+            "description": "Feed personalizzato",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/screenshots/mobile-event",
+            "sizes": "458x915",
+            "type": "image/png",
+            "description": "Pagina informazioni evento",
+            "form_factor": "narrow"
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Eventi",
+            "url": "/#/events",
+            "description": "Scopri eventi vicino alla tua università"
+        },
+        {
+            "name": "Convenzioni",
+            "url": "/#/discounts",
+            "description": "Offerte dedicate agli studenti"
+        },
+        {
+            "name": "Account",
+            "url": "/#/account",
+            "description": "Le tue impostazioni ed i tuoi biglietti per gli eventi"
+        }
+    ]
 }
