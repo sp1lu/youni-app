@@ -21,7 +21,7 @@ function SignupPage() {
     const navigate = useNavigate();
 
     /** Contexts */
-    const { baseUser } = useAuth();
+    const { baseUser, refreshUser } = useAuth();
     const { createSnackbar } = useSnackbars();
 
     /** State */
@@ -73,7 +73,10 @@ function SignupPage() {
         };
 
         addUser(user, 'appUsers', appUserConverter)
-            .then(() => navigate('/'))
+            .then(async () => {
+                await refreshUser();
+                navigate('/')
+            })
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione dell'utente.`, 'ERROR'))
     }
 
