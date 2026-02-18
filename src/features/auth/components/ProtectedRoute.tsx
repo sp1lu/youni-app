@@ -23,26 +23,21 @@ function ProtectedRoute(props: ProtectedRouteProps) {
     const navigate = useNavigate();
 
     /** Effects */
-    useEffect(() => {
-        console.log(baseUser, user, loading);        
+    useEffect(() => {     
         if (loading) return;
 
         if (!baseUser) {
-            console.log('1');
             navigate('/landing')
         }
         else if (!user) {
-            console.log('2');
             navigate('/signup')
         }
         else if (allowedRoles && !allowedRoles.includes(user.role)) {
-            console.log('3');
             navigate('/')
         }
     }, [baseUser, user, loading]);
 
-    if (loading) {
-        console.log('loggin in...');        
+    if (loading) {      
         return (
             <div className='protected-route'>
                 <span className='spinner'></span>
@@ -51,8 +46,7 @@ function ProtectedRoute(props: ProtectedRouteProps) {
         )
     }
 
-    /** Node */
-    console.log('YEEEEE');    
+    /** Node */  
     return (
         <>{children}</>
     )
