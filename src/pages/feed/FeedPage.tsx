@@ -71,6 +71,7 @@ function FeedPage() {
         getAllPosts(city.url)
             .then((posts: Post[]) => setPosts(posts))
             .catch((err: unknown) => console.log(err))
+            .finally(() => console.log(posts))
     }, [cities, user]);
 
     useEffect(() => {
