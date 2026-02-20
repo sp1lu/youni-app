@@ -7,14 +7,14 @@ import type { SnackbarData, SnackbarType } from '../types';
 /** Types */
 interface SnackbarsContextValue {
     snackbars: SnackbarData[],
-    createSnackbar: (text: string, type: SnackbarType) => void,
+    createSnackbar: (text: string, type: SnackbarType) => string,
     removeSnackbar: (id: string) => void
 }
 
 /** Context */
 export const SnackbarsContext = createContext<SnackbarsContextValue>({
     snackbars: [],
-    createSnackbar: () => { },
+    createSnackbar: () => '',
     removeSnackbar: () => { }
 });
 
@@ -22,16 +22,18 @@ export const SnackbarsContext = createContext<SnackbarsContextValue>({
 export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
     const [snackbars, setSnackbars] = useState<SnackbarData[]>([]);
 
-    const createSnackbar = (text: string, type: SnackbarType): void => {
+    const createSnackbar = (text: string, type: SnackbarType): string => {
+        const id: string = `snackbar_${new Date().getTime()}`
         setSnackbars((oldValue: SnackbarData[]) => {
             return [
                 ...oldValue, {
-                    id: `snackbar_${new Date().getTime()}`,
+                    id,
                     text,
                     type
                 }
             ];
-        })
+        });
+        return id;
     }
 
     const removeSnackbar = (id: string): void => {

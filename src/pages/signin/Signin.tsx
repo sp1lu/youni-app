@@ -17,7 +17,7 @@ function SigninPage() {
 
     /** Contexts */
     const { loginWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
-    const { createSnackbar } = useSnackbars();
+    const { createSnackbar, removeSnackbar } = useSnackbars();
 
     /** State */
     const [formData, setFormData] = useState<Record<string, string>>({});
@@ -41,9 +41,13 @@ function SigninPage() {
             !('password' in formData)
         ) return;
 
+        const snackbarId: string = createSnackbar('Autenticazione in corso', 'SUCCESS');
         loginWithEmailAndPassword(formData.email, formData.password)
-            .then(() => navigate('/'))
+            .then(() => {
+                navigate('/');
+            })
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nel login.`, 'ERROR'))
+            .finally(() => removeSnackbar(snackbarId))
     }
 
     const loginWithGoogle = () => {

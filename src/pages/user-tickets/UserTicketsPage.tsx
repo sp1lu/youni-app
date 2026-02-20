@@ -31,6 +31,7 @@ function UserTicketsPage() {
     const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [appEvents, setAppEvents] = useState<AppEvent[]>([]);
 
@@ -38,13 +39,20 @@ function UserTicketsPage() {
     useEffect(() => {
         if (!user) return;
 
+        setIsLoading(true);
         getTicketsByUser(user.id)
             .then((tickets: Ticket[]) => {
                 setTickets(tickets);
             })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [user]);
 
     useEffect(() => {
+        if (tickets.length === 0) return;
+        
+        setIsLoading(true);
         const eventsPromises: Promise<AppEvent | null>[] = tickets.map(ticket =>
             getEventById(ticket.event)
         );
@@ -56,7 +64,9 @@ function UserTicketsPage() {
             .catch((err: unknown) => {
                 createSnackbar(err instanceof Error ? err.message : `Errore nel recupero dei tuoi biglietti.`, 'ERROR')
             })
-
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [tickets]);
 
     /** Methods */
@@ -88,14 +98,18 @@ function UserTicketsPage() {
 
             <div className='tickets-list'>
                 {
-                    appEvents.length > 0 ?
-                    appEvents.map((event: AppEvent, i: number) => (
-                        <Link to={`./${tickets[i].id}`} className='ticket' key={event.id}>
-                            <p className='ticket__title subtitle-xs'>{event.title}</p>
-                            <p className='ticket__date'>{new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' }).format(event.date)}</p>
-                        </Link>
-                    )) :
-                    <p className='empty-list'>Non sei ancora registrato a nessun evento!</p>
+                    isLoading ?
+                        <div className='tickets-loader'>
+                            <span className='spinner'></span>
+                        </div> :
+                        appEvents.length > 0 ?
+                            appEvents.map((event: AppEvent, i: number) => (
+                                <Link to={`./${tickets[i].id}`} className='ticket' key={event.id}>
+                                    <p className='ticket__title subtitle-xs'>{event.title}</p>
+                                    <p className='ticket__date'>{new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' }).format(event.date)}</p>
+                                </Link>
+                            )) :
+                            <p className='empty-list'>Non sei ancora registrato a nessun evento!</p>
                 }
             </div>
         </div>

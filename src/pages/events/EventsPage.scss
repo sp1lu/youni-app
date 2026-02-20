@@ -13,6 +13,11 @@
     text-align: center;
 }
 
+.events-page .events-list__loader {
+    display: flex;
+    justify-content: center;
+}
+
 .events-page .filter-form {
     display: flex;
     flex-direction: column;

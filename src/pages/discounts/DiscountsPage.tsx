@@ -117,7 +117,10 @@ function DiscountsPage() {
 
             {
                 isLoadingDiscounts ?
-                    <p className='discounts-list__empty'>Caricamento convenzioni in corso...</p> :
+                    <div className='discounts-list__loader'>
+                        <span className='spinner'></span>
+                    </div>
+                    :
                     <div className='discounts-list'>
                         {
                             filteredDiscounts.length > 0 ?

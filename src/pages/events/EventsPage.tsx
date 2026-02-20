@@ -115,7 +115,9 @@ function EventsPage() {
             </Drawer>
             {
                 isLoadingEvents ?
-                    <p className='events-list__empty'>Caricamento eventi in corso...</p> :
+                    <div className='events-list__loader'>
+                        <span className='spinner'></span>
+                    </div> :
                     <div className='events-list'>
                         {
                             filteredEvents.length > 0 ?

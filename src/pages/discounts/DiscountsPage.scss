@@ -13,6 +13,11 @@
     text-align: center;
 }
 
+.discounts-page .discounts-list__loader {
+    display: flex;
+    justify-content: center;
+}
+
 .discounts-page .filter-form {
     display: flex;
     flex-direction: column;

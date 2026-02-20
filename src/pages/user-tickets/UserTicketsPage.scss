@@ -29,6 +29,11 @@
     font-weight: 400;
 }
 
+.my-tickets-page .tickets-loader {
+    display: flex;
+    justify-content: center;
+}
+
 .my-tickets-page .empty-list {
     text-align: center;
 }
