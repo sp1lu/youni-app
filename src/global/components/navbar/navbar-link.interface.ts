@@ -1,7 +1,7 @@
 export interface NavbarLink {
     id: string,
     path: string,
+    isExternal?: boolean,
     label: string,
-    allowedRoles: string[],
-    icon?: string
+    icon?: string,
 }

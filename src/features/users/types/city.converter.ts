@@ -7,10 +7,11 @@ import type { City } from './city.type'
 /** Converter */
 export const cityConverter = {
     toFirestore: (city: City) => {
-        const { label, url } = city;
+        const { label, url, links } = city;
         return {
             label: label ?? '',
-            url: url ?? ''
+            url: url ?? '',
+            links: links ?? new Map()
         }
     },
     fromFirestore: (snapshot: DocumentSnapshot): City | null => {
@@ -18,7 +19,8 @@ export const cityConverter = {
         return data ? {
             id: snapshot.id,
             label: data['label'] ?? snapshot.id,
-            url: data['url'] ?? ''
+            url: data['url'] ?? '',
+            links: data['links'] ? new Map<string, string>(Object.entries(data['links'])) : undefined
         } as City : null;
     }
 }

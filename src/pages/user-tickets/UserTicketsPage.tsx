@@ -10,9 +10,11 @@ import { useSnackbars } from '../../features/snackbars'
 import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 import type { Ticket } from '../../features/events'
 import type { AppEvent } from '../../features/events'
+import type { City } from '../../features/users'
 
 /** Services */
 import { getEventById, getTicketsByUser } from '../../features/events'
+import { getAllCities } from '../../features/users'
 
 /** Components */
 import { PWABanner } from '../../features/pwa'
@@ -31,11 +33,19 @@ function UserTicketsPage() {
     const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
+    const [cities, setCities] = useState<City[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [appEvents, setAppEvents] = useState<AppEvent[]>([]);
 
     /** Effects */
+    useEffect(() => {
+        if (!user) return;
+        getAllCities()
+            .then((cities: City[]) => setCities(cities))
+            .catch((err: unknown) => console.log(err))
+    }, [user])
+
     useEffect(() => {
         if (!user) return;
 
@@ -51,7 +61,7 @@ function UserTicketsPage() {
 
     useEffect(() => {
         if (tickets.length === 0) return;
-        
+
         setIsLoading(true);
         const eventsPromises: Promise<AppEvent | null>[] = tickets.map(ticket =>
             getEventById(ticket.event)
@@ -93,7 +103,7 @@ function UserTicketsPage() {
             </Header>
             <PWABanner />
             <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} externalUrlsMap={cities.find((c) => c.id === user?.city)?.links} onLogout={logout} />
             </Drawer>
 
             <div className='tickets-list'>

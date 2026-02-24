@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'r
 /** Services */
 import { formatDate, getAllEventCategories, getEventCategoryLabel } from '../../global/services'
 import { getAllEvents } from '../../features/events'
+import { getAllCities } from '../../features/users'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
@@ -13,6 +14,7 @@ import type { AppEvent } from '../../features/events'
 import type { EventCategory } from '../../global/types'
 import type { ModalHandle } from '../../global/components/modal/Modal'
 import type { DrawerHandle } from '../../global/components/drawer/Drawer'
+import type { City } from '../../features/users'
 
 /** Components */
 import { PWABanner } from '../../features/pwa'
@@ -31,6 +33,7 @@ function EventsPage() {
     const drawerRef = useRef<DrawerHandle | null>(null);
 
     /** State */
+    const [cities, setCities] = useState<City[]>([]);
     const [isLoadingEvents, setIsLoadingEvents] = useState<boolean>(false);
     const [events, setEvents] = useState<AppEvent[]>([]);
     const [filteredEvents, setFilteredEvents] = useState<AppEvent[]>([]);
@@ -38,6 +41,13 @@ function EventsPage() {
     const [filterForm, setFilterForm] = useState<Record<string, boolean>>({});
 
     /** Effects */
+    useEffect(() => {
+        if (!user) return;
+        getAllCities()
+            .then((cities: City[]) => setCities(cities))
+            .catch((err: unknown) => console.log(err))
+    }, [user])
+
     useEffect(() => {
         setIsLoadingEvents(true);
         getAllEvents()
@@ -111,7 +121,7 @@ function EventsPage() {
             </Header>
             <PWABanner />
             <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} externalUrlsMap={cities.find((c) => c.id === user?.city)?.links} onLogout={logout} />
             </Drawer>
             {
                 isLoadingEvents ?

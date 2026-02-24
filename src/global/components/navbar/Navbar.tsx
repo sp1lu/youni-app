@@ -15,12 +15,13 @@ interface NavbarProps {
     isLogged: boolean,
     userRole: string,
     logOutIcon: string,
+    externalUrlsMap?: Map<string, string>,
     onLogout: () => void
 }
 
 /** Component */
 function Navbar(props: NavbarProps) {
-    const { isLogged, userRole, logOutIcon, onLogout } = props;
+    const { isLogged, logOutIcon, externalUrlsMap, onLogout } = props;
 
     /** Methods */
     const onLogoutClick = (): void => {
@@ -34,22 +35,34 @@ function Navbar(props: NavbarProps) {
                 <ul className='navbar-list'>
                     {
                         NAVBAR_LINKS.map((l: NavbarLink) => (
-                            (l.path === '/login' && isLogged) || (l.allowedRoles.length > 0 && !l.allowedRoles.includes(userRole)) ?
-                                '' :
-                                <div className='navbar-element' key={l.path}>
-                                    {/* <NavLink to={l.path} className='navbar-element__link fw-700'> */}
-                                    <NavLink to={l.path} className={({isActive}) => `navbar-element__link fw-700 ${isActive ? 'navbar-element__link--active' : ''}`}>
-                                        {
-                                            l.icon ? <span style={{ maskImage: `url(${l.icon})` }} className='navbar-element__icon'></span> : ''
-                                        }
-                                        {l.label}
-                                    </NavLink>
-                                </div>
+                            l.path === '/login' && isLogged ? '' :
+                                l.isExternal ?
+                                    (
+                                        externalUrlsMap && externalUrlsMap.has(l.path) ?
+                                            <div className='navbar-element' key={l.id}>
+                                                <a href={externalUrlsMap.get(l.path)} target='_blank' className='navbar-element__link fw-700'>
+                                                    {
+                                                        l.icon ? <span style={{ maskImage: `url(${l.icon})` }} className='navbar-element__icon'></span> : ''
+                                                    }
+                                                    {l.label}
+                                                </a>
+                                            </div> :
+                                            ''
+                                    )
+                                    :
+                                    <div className='navbar-element' key={l.id}>
+                                        <NavLink to={l.path} className={({ isActive }) => `navbar-element__link fw-700 ${isActive ? 'navbar-element__link--active' : ''}`}>
+                                            {
+                                                l.icon ? <span style={{ maskImage: `url(${l.icon})` }} className='navbar-element__icon'></span> : ''
+                                            }
+                                            {l.label}
+                                        </NavLink>
+                                    </div>
                         ))
                     }
                     {
                         isLogged ?
-                            <button type="button" className='navbar-logout fw-700' onClick={onLogoutClick}>
+                            <button type='button' className='navbar-logout fw-700' onClick={onLogoutClick}>
                                 <span style={{ maskImage: `url(${logOutIcon})` }} className='navbar-element__icon'></span>
                                 Logout
                             </button> :

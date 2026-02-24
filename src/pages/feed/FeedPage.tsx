@@ -71,7 +71,6 @@ function FeedPage() {
         getAllPosts(city.url)
             .then((posts: Post[]) => setPosts(posts))
             .catch((err: unknown) => console.log(err))
-            .finally(() => console.log(posts))
     }, [cities, user]);
 
     useEffect(() => {
@@ -105,7 +104,7 @@ function FeedPage() {
             </Header>
             <PWABanner />
             <Drawer ref={drawerRef} toggleIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/drag_handle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`}>
-                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} onLogout={logout} />
+                <Navbar isLogged={user ? true : false} userRole={user ? user.role : 'USER'} logOutIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/logout_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} externalUrlsMap={cities.find((c) => c.id === user?.city)?.links} onLogout={logout} />
             </Drawer>
             {
                 events.length > 0 &&

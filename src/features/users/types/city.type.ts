@@ -1,5 +1,6 @@
 export interface City {
     id: string,
     label: string,
-    url: string
+    url: string,
+    links?: Map<string, string>
 }
