@@ -67,7 +67,7 @@ function YouniCardPage() {
             <div className='younicard-page__content'>
                 <div className='qrcode-wrapper'>
                     {
-                        user && <QRCodeCanvas url={`${import.meta.env.VITE_ADMIN_URL}/check/user/${user.id}`} />
+                        user && <QRCodeCanvas url={`${import.meta.env.VITE_ADMIN_URL}/#/check/user/${user.id}`} />
                     }
                 </div>
                 <p className='younicard-sub'>Questa ☝️ è la tua Youni Card digitale!</p>

@@ -99,7 +99,7 @@ function TicketPage() {
                     appEvent ?
                         <div className='ticket-infos'>
                             <div className='qrcode-wrapper'>
-                                <QRCodeCanvas url={`${import.meta.env.VITE_ADMIN_URL}/check/ticket/${id}`}></QRCodeCanvas>
+                                <QRCodeCanvas url={`${import.meta.env.VITE_ADMIN_URL}/#/check/ticket/${id}`}></QRCodeCanvas>
                             </div>
                             <div className='divider divider--dashed'></div>
 
