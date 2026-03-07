@@ -54,7 +54,7 @@ function EventSubscribeSuccessPage() {
                                 <span className='confirmed__icon'></span>
                             </div>
                             <div className='confirmed__texts'>
-                                <h3 className='confirmed__title'>Pagamento confermato</h3>
+                                <h3 className='confirmed__title'>Iscrizione confermata</h3>
                                 <p className='confirmed__msg'>Non vediamo l'ora tu sia dei nostri!</p>
                             </div>
                         </div>

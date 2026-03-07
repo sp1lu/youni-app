@@ -1,0 +1,81 @@
+@use '@styles/index' as *;
+
+.stripe-cancel-page {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.stripe-cancel-page .stripe-cancel-page-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.stripe-cancel-page .subscribe-event-success-infos {
+    padding: 24px 0 0 0;
+    flex: 1;
+}
+
+.stripe-cancel-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 32px 0;
+}
+
+.stripe-cancel-page .cancel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.stripe-cancel-page .confirm__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xl, 100px);
+    background-color: red;
+    height: 48px;
+    width: 48px;
+}
+
+.stripe-cancel-page .cancel__icon {
+    @include masked-icon('/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-100, white));
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.stripe-cancel-page .cancel__texts {
+    text-align: center;
+}
+
+.stripe-cancel-page .cancel__title,
+.stripe-cancel-page .cancel__msg,
+.stripe-cancel-page .event-info__title,
+.stripe-cancel-page .event-info__date {
+    margin: 0;
+}
+
+.stripe-cancel-page .event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stripe-cancel-page .event-info__date {
+    color: var(--neutral-600, grey);
+}
+
+.stripe-cancel-page .subscribe-event-success-cta {
+    margin: 0 0 16px 0;
+    width: 100%;
+}
+
+.stripe-cancel-page .subscribe-event-success-cta .button {
+    padding: 12px;
+    display: inline-block;
+    width: 100%;
+}

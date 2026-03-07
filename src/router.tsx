@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, SigninPage, SignupPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createHashRouter([
@@ -113,7 +113,9 @@ export const router: DataRouter = createHashRouter([
                         ]
                     }
                 ]
-            }
+            },
+            { path: 'success', element: <ProtectedRoute><StripeSuccessPage /></ProtectedRoute> },
+            { path: 'cancel', element: <ProtectedRoute><StripeCancelPage /></ProtectedRoute> }
         ]
     }
 ]);

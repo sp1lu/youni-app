@@ -1,0 +1,81 @@
+@use '@styles/index' as *;
+
+.stripe-success-page {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.stripe-success-page .stripe-success-page-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.stripe-success-page .subscribe-event-success-infos {
+    padding: 24px 0 0 0;
+    flex: 1;
+}
+
+.stripe-success-page .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-400, lightgrey);
+    margin: 32px 0;
+}
+
+.stripe-success-page .confirmed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.stripe-success-page .confirm__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xl, 100px);
+    background-color: var(--primary-400, green);
+    height: 48px;
+    width: 48px;
+}
+
+.stripe-success-page .confirmed__icon {
+    @include masked-icon('/icons/check_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg', var(--neutral-100, white));
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.stripe-success-page .confirmed__texts {
+    text-align: center;
+}
+
+.stripe-success-page .confirmed__title,
+.stripe-success-page .confirmed__msg,
+.stripe-success-page .event-info__title,
+.stripe-success-page .event-info__date {
+    margin: 0;
+}
+
+.stripe-success-page .event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stripe-success-page .event-info__date {
+    color: var(--neutral-600, grey);
+}
+
+.stripe-success-page .subscribe-event-success-cta {
+    margin: 0 0 16px 0;
+    width: 100%;
+}
+
+.stripe-success-page .subscribe-event-success-cta .button {
+    padding: 12px;
+    display: inline-block;
+    width: 100%;
+}

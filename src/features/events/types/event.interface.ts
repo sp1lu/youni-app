@@ -12,5 +12,6 @@ export interface AppEvent {
     maxSeats: number,
     price: number,
     city: string,
-    categories: string[]
+    categories: string[],
+    stripePriceId?: string
 }

@@ -12,8 +12,9 @@ import type { DrawerHandle } from '../../global/components/drawer/Drawer'
 import type { City } from '../../features/users'
 
 /** Services */
-import { addTicket, getEventById, getTicketsByEvent } from '../../features/events'
 import { getAllCities } from '../../features/users'
+import { addTicket, getEventById, getTicketsByEvent } from '../../features/events'
+import { continueWithStripe } from '../../features/stripe'
 
 /** Components */
 import { PWABanner } from '../../features/pwa'
@@ -76,17 +77,24 @@ function EventSubscribePage() {
         drawerRef.current?.open();
     }
 
-    const onSubscribeBtnClick = () => {
+    const onSubscribeBtnClick = async () => {
         if (!appEvent || !user) return;
-        if (appEvent.price > 0) return;
+
         if (isUserEnrolled) {
             createSnackbar(`Sei già iscritto a questo evento!`, 'ERROR');
             return;
         }
+
         if (tickets.length > appEvent.maxSeats) {
             createSnackbar(`Ops, sembra che nel frattempo i posti siano esauriti!`, 'ERROR');
             return;
         }
+
+        if (appEvent.price > 0 && appEvent.stripePriceId) {
+            await continueWithStripe(user, appEvent);
+            return;
+        }
+
         addTicket({ id: '', user: user.id, event: appEvent.id })
             .then((ticketId: string) => navigate('../success', { state: { ticketId } }))
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella creazione del tuo biglietto. Riprovare.`, 'ERROR'))

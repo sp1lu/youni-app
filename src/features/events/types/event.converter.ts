@@ -28,7 +28,8 @@ export const eventConverter = {
             maxSeats: data['maxSeats'] ? parseFloat(data['maxSeats']) : -1,
             price: data['price'] ? parseFloat(data['price']) : 0.00,
             city: data['city'] ?? 'genova',
-            categories: data['categories'] ?? []
+            categories: data['categories'] ?? [],
+            stripePriceId: data['stripePriceId'] ?? undefined
         } : null;
     }
 }

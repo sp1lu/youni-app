@@ -1,0 +1,1 @@
+export { default as StripeSuccessPage } from './StripeSuccessPage'
