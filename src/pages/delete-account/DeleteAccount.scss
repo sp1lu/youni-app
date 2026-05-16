@@ -1,0 +1,24 @@
+.delete-account-page {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+.delete-account-page .delete-account-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+}
+
+.delete-account-page .delete-account {
+    flex: 1;
+}
+
+.delete-account-page .confirm {
+    margin-bottom: 16px;
+}
+
+.delete-account-page .confirm-btn {
+    width: 100%;
+}

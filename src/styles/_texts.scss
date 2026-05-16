@@ -6,6 +6,7 @@ h5,
 h6 {
     line-height: 2.75rem;
     margin: 1rem 0;
+    color: var(--secondary-500);
 }
 
 p {
@@ -19,6 +20,10 @@ a {
     &:hover {
         color: var(--primary-600, green);
     }
+}
+
+a.warning {
+    color: red;
 }
 
 .title-l {

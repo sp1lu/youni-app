@@ -1,6 +1,5 @@
 /** Dependencies */
-import { createUserWithEmailAndPassword, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, type AuthError, type UserCredential } from 'firebase/auth'
-
+import { createUserWithEmailAndPassword, GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, deleteUser, signOut, type AuthError, type UserCredential, type User as FirebaseUser } from 'firebase/auth'
 
 /** Data */
 import { auth } from '../../../global/services'
@@ -11,7 +10,7 @@ export const createAccountWithEmailAndPassword = async (email: string, password:
         .then((userCredential: UserCredential) => {
             console.log('Nuovo utente creato con email e password:', userCredential.user);
         })
-        .catch((error: any) => {          
+        .catch((error: any) => {
             throw new Error(error instanceof Error ? error.message : `Errore nella creazione dell'utente.`);
         })
 }
@@ -56,4 +55,16 @@ export const logout = async (): Promise<void> => {
         .catch((error: AuthError) => {
             throw new Error(error instanceof Error ? error.message : `Errore nell'effettuare il logout.`);
         })
+}
+
+export const resetPassword = async (email: string): Promise<void> => {
+    return sendPasswordResetEmail(auth, email);
+}
+
+export const deleteCurrentUser = async (): Promise<void> => {
+    if (!auth.currentUser) {
+        throw new Error('Nessun utente autenticato.');
+    }
+
+    await deleteUser(auth.currentUser);
 }

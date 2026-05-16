@@ -111,7 +111,7 @@ function SignupPage() {
 
                     <button type='submit' className='primary'>Registrati</button>
                     <div className='form-field'>
-                        <label htmlFor='privacy-policy'>Confermo di aver letto la privacy policy e la cookie policy di Youni</label>
+                        <label htmlFor='privacy-policy'>Confermo di aver letto la <a href='https://youni.life/privacy-policy/' target='_blank'>privacy policy</a> di Youni</label>
                         <input type='checkbox' name='privacyPolicy' id='privacy-policy' required />
                     </div>
                 </form>

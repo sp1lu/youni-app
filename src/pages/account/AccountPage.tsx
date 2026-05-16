@@ -77,6 +77,9 @@ function AccountPage() {
                     </NavLink>
                 </div>
             </div>
+            <div className='account-footer'>
+                <NavLink to='./delete-account' className='warning'>Elimina account</NavLink>
+            </div>
         </div>
     )
 }

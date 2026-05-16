@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, ResetPassword, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage, DeleteAccountPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createHashRouter([
@@ -33,6 +33,7 @@ export const router: DataRouter = createHashRouter([
                     }
                 }
             },
+            { path: 'reset-password', element: <ResetPassword />},
             {
                 path: 'feed',
                 element: <ProtectedRoute><FeedPage /></ProtectedRoute>
@@ -111,6 +112,10 @@ export const router: DataRouter = createHashRouter([
                                 element: <ProtectedRoute><UnsubscribeTicketPage /></ProtectedRoute>
                             }
                         ]
+                    },
+                    {
+                        path: 'delete-account',
+                        element: <ProtectedRoute><DeleteAccountPage /></ProtectedRoute>
                     }
                 ]
             },

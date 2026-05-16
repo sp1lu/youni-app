@@ -92,6 +92,9 @@ function SigninPage() {
                 <div className='signin__footer'>
                     <p>Non hai un account? <Link to='/landing'>Allora registrati!</Link></p>
                 </div>
+                <div className='signin__footer'>
+                    <p>Hai dimenticato la password? <Link to='/reset-password'>Niente paura!</Link></p>
+                </div>
             </div>
         </div>
     )
