@@ -10,9 +10,6 @@ export const createAccountWithEmailAndPassword = async (email: string, password:
         .then((userCredential: UserCredential) => {
             console.log('Nuovo utente creato con email e password:', userCredential.user);
         })
-        .catch((error: any) => {
-            throw new Error(error instanceof Error ? error.message : `Errore nella creazione dell'utente.`);
-        })
 }
 
 export const loginWithEmailAndPassword = async (email: string, password: string): Promise<void> => {

@@ -44,7 +44,7 @@ function RecoverPasswordPage() {
             <div className="recover-password">
                 <div className='recover-password__title'>
                     <h1 className='title-l'>Recupera password</h1>
-                    <p className='subtitle-s'>Non ricordi più la password? Niente paura: ci basta conoscere la mail con cui ti sei registrato.</p>
+                    <p className='subtitle-s'>Ci basta conoscere la mail con cui ti sei registrato.</p>
                 </div>
 
                 <form className='recover-password__form' onSubmit={onSubmit}>
@@ -53,7 +53,7 @@ function RecoverPasswordPage() {
                 </form>
 
                 <div className='recover-password__footer'>
-                    <p>Falso allarme? <Link to='/signin'>Torna al login</Link></p>
+                    <p>Falso allarme? <Link to='/login'>Torna al login</Link></p>
                 </div>
             </div>
         </div>

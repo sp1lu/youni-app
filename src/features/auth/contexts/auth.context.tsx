@@ -48,7 +48,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const refreshUser = async () => {
         if (!baseUser) return;
-
         setLoading(true);
 
         try {
@@ -60,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
+        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             setLoading(true);
 
             if (!firebaseUser) {
@@ -74,9 +73,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setFirebaseUser(firebaseUser);
             setBaseUser({ id: firebaseUser.uid, email: firebaseUser.email ?? '' });
 
-            getUserById<AppUser | null>(firebaseUser.uid, 'appUsers', appUserConverter)
-                .then((appUser: AppUser | null) => setUser(appUser))
-                .finally(() => setLoading(false))
+            const appUser = await getUserById<AppUser | null>(firebaseUser.uid, 'appUsers', appUserConverter);
+
+            setUser(appUser);
+            setLoading(false);
         });
 
         return unsubscribe;

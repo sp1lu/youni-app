@@ -6,10 +6,10 @@ import { getAllCities } from './features/users/services'
 
 /** Components */
 import App from './App'
-import { ProtectedRoute } from './features/auth'
+import { ProtectedRoute, SignupGuard } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, ResetPassword, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage, DeleteAccountPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, ResetPassword, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage, DeleteAccountPage, LoginPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createHashRouter([
@@ -22,18 +22,17 @@ export const router: DataRouter = createHashRouter([
                 element: <Navigate to='feed'></Navigate>,
 
             },
-            { path: 'landing', element: <LandingPage /> },
-            { path: 'signin', element: <SigninPage /> },
+            { path: 'login', element: <LoginPage /> },
             {
                 path: 'signup',
-                element: <ProtectedRoute><SignupPage /></ProtectedRoute>,
+                element: <SignupGuard><SignupPage /></SignupGuard>,
                 loader: async () => {
                     return {
                         cities: await getAllCities()
                     }
                 }
             },
-            { path: 'reset-password', element: <ResetPassword />},
+            { path: 'reset-password', element: <ResetPassword /> },
             {
                 path: 'feed',
                 element: <ProtectedRoute><FeedPage /></ProtectedRoute>

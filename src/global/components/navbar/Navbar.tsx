@@ -69,6 +69,12 @@ function Navbar(props: NavbarProps) {
                             ''
                     }
                 </ul>
+                <div className='navbar-element'>
+                    <a href='https://youni.life/contatti/' target='_blank' className='navbar-element__link fw-700'>
+                        <span style={{ maskImage: `url(${import.meta.env.VITE_PUBLIC_URL}/icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg` }} className='navbar-element__icon'></span>
+                        Contatti
+                    </a>
+                </div>
             </nav>
         </>
     )

@@ -38,6 +38,10 @@ $width: 300px;
     mask-repeat: no-repeat;
 }
 
+.drawer .drawer-content {
+    height: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .drawer {
         right: -100dvw;
