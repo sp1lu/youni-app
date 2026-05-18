@@ -9,7 +9,7 @@ import App from './App'
 import { ProtectedRoute, SignupGuard } from './features/auth'
 
 /** Pages */
-import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, LandingPage, PersonalInfoPage, ResetPassword, SigninPage, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage, DeleteAccountPage, LoginPage } from './pages'
+import { AccountPage, DiscountPage, DiscountsPage, EventPage, EventsPage, EventSubscribePage, EventSubscribeSuccessPage, FeedPage, PersonalInfoPage, ResetPassword, SignupPage, StripeCancelPage, StripeSuccessPage, TicketPage, UnsubscribeTicketPage, UserTicketsPage, YouniCardPage, DeleteAccountPage, LoginPage } from './pages'
 
 /** Router */
 export const router: DataRouter = createHashRouter([

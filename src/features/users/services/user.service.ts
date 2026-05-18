@@ -20,7 +20,6 @@ export async function addUser(data: User, collectionId: string, converter: Fires
 
 export async function updateUser(data: User, collectionId: string, converter: FirestoreDataConverter<User | null>): Promise<void> {
     const { id, ...user } = data;
-    console.log('UPDATE USER', id, user);
     
     try {
         const docRef = doc(db, collectionId, id).withConverter(converter);

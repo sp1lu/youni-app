@@ -4,13 +4,19 @@ import { NavLink } from 'react-router'
 
 /** Types */
 import type { DiscountCategory, EventCategory } from '../../global/types'
+import type { AppEvent } from '../../features/events'
+import type { Discount } from '../../features/discounts'
+import type { Post } from '../../features/posts'
+import type { WpPage } from '../../features/wp-pages'
+import type { City } from '../../features/users'
 
 /** Services */
-import { getAllEvents, type AppEvent } from '../../features/events'
-import { getAllDiscounts, type Discount } from '../../features/discounts'
-import { getAllPosts, type Post } from '../../features/posts'
-import { getAllCities, type City } from '../../features/users'
 import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscountCategoryLabel, getEventCategoryLabel } from '../../global/services'
+import { getAllEvents } from '../../features/events'
+import { getAllDiscounts } from '../../features/discounts'
+import { getAllPosts } from '../../features/posts'
+import { getAllWpPages } from '../../features/wp-pages'
+import { getAllCities } from '../../features/users'
 
 /** Contexts */
 import { useAuth } from '../../features/auth'
@@ -38,6 +44,7 @@ function FeedPage() {
     const [events, setEvents] = useState<AppEvent[]>([]);
     const [discounts, setDiscounts] = useState<Discount[]>([]);
     const [posts, setPosts] = useState<Post[]>([]);
+    const [wpPages, setWpPages] = useState<WpPage[]>([]);
     const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
     const [discountCategories, setDiscountCategories] = useState<DiscountCategory[]>([]);
 
@@ -69,7 +76,17 @@ function FeedPage() {
         if (!city) return;
 
         getAllPosts(city.url)
-            .then((posts: Post[]) => setPosts(posts))
+            .then((posts: Post[]) => setPosts(posts.filter((p) => p.categoryIds.includes(city.categoryId))))
+            .catch((err: unknown) => console.log(err))
+    }, [cities, user]);
+
+    useEffect(() => {
+        if (!user || cities.length === 0) return;
+        const city: City | undefined = cities.find((c) => c.id === user.city);
+        if (!city) return;
+
+        getAllWpPages(city.url)
+            .then((pages: WpPage[]) => setWpPages((pages.filter((p) => city.pageIds.includes(p.id)))))
             .catch((err: unknown) => console.log(err))
     }, [cities, user]);
 
@@ -154,6 +171,20 @@ function FeedPage() {
                                         })()
                                     }
                                 />
+                            ))
+                        }
+                    </Slider>
+                </div>
+            }
+
+            {
+                wpPages.length > 0 &&
+                <div className='feed-section'>
+                    <a href={cities.find((c) => c.id === user?.city)?.links?.get('graduationUrl')} target='_blank' className='subtitle-xs section-title'>Servizi di laurea<span className='title-icon'></span></a>
+                    <Slider>
+                        {
+                            wpPages.map((p: WpPage) => (
+                                <Card key={p.id} uid={p.id + ''} img={p.img} text={p.title} desc='' url={p.url} />
                             ))
                         }
                     </Slider>
