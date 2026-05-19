@@ -194,7 +194,7 @@ function FeedPage() {
             {
                 posts.length > 0 &&
                 <div className='feed-section'>
-                    <a href='https://youni.life/category/blog' target='_blank' className='subtitle-xs section-title'>News<span className='title-icon'></span></a>
+                    <a href={cities.find((c) => c.id === user?.city)?.links?.get('newsUrl')} target='_blank' className='subtitle-xs section-title'>News<span className='title-icon'></span></a>
                     <Slider>
                         {
                             posts.map((p: Post) => (

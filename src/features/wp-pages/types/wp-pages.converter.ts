@@ -7,8 +7,15 @@ export function wpPageConverter(data: any): WpPage {
 
     return {
         id: data['id'],
-        img: '',
+        img: searchThumbnailImg(data),
         title: ('title' in data && 'rendered' in data['title']) ? data['title']['rendered'] : '',
         url: ('link' in data) ? data['link'] : ''
     }
+}
+
+function searchThumbnailImg(page: any): string {
+    if (!('_embedded' in page) || !('wp:featuredmedia' in page['_embedded']) || !Array.isArray(page['_embedded']['wp:featuredmedia']) || page['_embedded']['wp:featuredmedia'].length === 0) return '';
+    const firstElement: Record<any, any> = page['_embedded']['wp:featuredmedia'][0];
+    if (!('source_url' in firstElement) || typeof firstElement['source_url'] !== 'string') return '';
+    return firstElement['source_url'];
 }
