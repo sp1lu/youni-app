@@ -13,7 +13,7 @@ function StripeCancelPage() {
     return (
         <div className='page stripe-cancel-page'>
             <Header text='Annullamento' style={{ fontWeight: 700, textAlign: 'center' }}></Header>
-            <PWABanner />
+            <PWABanner closeIcon={`${import.meta.env.VITE_PUBLIC_URL}/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg`} />
 
             <div className='stripe-cancel-page-body'>
                 <div className='subscribe-event-success-infos'>

@@ -20,6 +20,16 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
     const [canInstall, setCanInstall] = useState(false)
     const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
 
+    /** Detect install */
+    const detectPWA = () => {
+        return (
+            window.matchMedia('(display-mode: standalone)').matches ||
+            // @ts-expect-error iOS
+            window.navigator.standalone === true ||
+            document.referrer.includes('android-app://')
+        );
+    }
+
     /** intercetta il prompt */
     useEffect(() => {
         const handler = (e: Event) => {
@@ -37,27 +47,54 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
 
     /** rileva se già installata */
     useEffect(() => {
-        const isStandalone =
-            window.matchMedia('(display-mode: standalone)').matches ||
-            // @ts-expect-error iOS
-            window.navigator.standalone === true;
+        const installed =
+            detectPWA() ||
+            localStorage.getItem('pwa-installed') === 'true';
 
-        setIsInstalled(isStandalone);
+        if (installed) {
+            localStorage.setItem('pwa-installed', 'true');
+        }
+
+        setIsInstalled(installed);
     }, []);
 
+    /** install completed */
     useEffect(() => {
-        const onAppInstalled = () => setIsInstalled(true);
-        window.addEventListener('appinstalled', onAppInstalled);
-        return () => window.removeEventListener('appinstalled', onAppInstalled);
+        const onAppInstalled = () => {
+            localStorage.setItem(
+                'pwa-installed',
+                'true'
+            );
+
+            setIsInstalled(true);
+            setCanInstall(false);
+            setDeferredPrompt(null);
+        }
+
+        window.addEventListener(
+            'appinstalled',
+            onAppInstalled
+        );
+
+        return () => {
+            window.removeEventListener(
+                'appinstalled',
+                onAppInstalled
+            );
+        }
 
     }, []);
-
 
     /** trigger install */
     const downloadPWA = async () => {
         if (!deferredPrompt) return;
-        (deferredPrompt as any).prompt();
-        await (deferredPrompt as any).userChoice;
+        const promptEvent = deferredPrompt as any;
+        promptEvent.prompt();
+        const choice = await promptEvent.userChoice;
+        if (choice.outcome === 'accepted') {
+            localStorage.setItem('pwa-installed', 'true');
+            setIsInstalled(true);
+        }
         setDeferredPrompt(null);
         setCanInstall(false);
     }
