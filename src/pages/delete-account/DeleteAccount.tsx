@@ -47,14 +47,9 @@ function DeleteAccount() {
 
     const onConfirmBtnClick = (): void => {
         if (!user) return;
-        // deleteTicketById(ticket.id)
-        //     .then(() => {
-        //         navigate('/account/my-tickets');
-        //     })
-        //     .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella disiscrizione all'evento.`, 'ERROR'))
-
         deleteUserById(user.id)
             .then(() => deleteCurrentUser())
+            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore nella disiscrizione all'evento.`, 'ERROR'))
     }
 
     /** Node */

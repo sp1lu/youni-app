@@ -2,7 +2,7 @@
 import { postConverter, type Post } from '../types'
 
 /** Methods */
-export async function getAllPosts(url: string): Promise<Post[]> {
+export async function getAllPosts(): Promise<Post[]> {
     return fetch(`https://youni.life/wp-json/wp/v2/posts?_embed`)
         .then((res: Response) => {
             if (!res.ok) throw new Error(`Errore nel recupero dei post.`);

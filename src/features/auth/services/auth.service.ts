@@ -1,5 +1,5 @@
 /** Dependencies */
-import { createUserWithEmailAndPassword, GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, deleteUser, signOut, type AuthError, type UserCredential, type User as FirebaseUser } from 'firebase/auth'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, deleteUser, signOut, type AuthError, type UserCredential } from 'firebase/auth'
 
 /** Data */
 import { auth } from '../../../global/services'

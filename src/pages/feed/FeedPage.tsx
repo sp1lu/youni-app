@@ -75,7 +75,7 @@ function FeedPage() {
         const city: City | undefined = cities.find((c) => c.id === user.city);
         if (!city) return;
 
-        getAllPosts(city.url)
+        getAllPosts()
             .then((posts: Post[]) => setPosts(posts.filter((p) => p.categoryIds.includes(city.categoryId))))
             .catch((err: unknown) => console.log(err))
     }, [cities, user]);
