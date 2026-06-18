@@ -22,7 +22,7 @@ function LoginPage() {
     const navigate = useNavigate();
 
     /** Contexts */
-    const { createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithApple } = useAuth();
+    const { createAccountWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle } = useAuth();
     const { createSnackbar, removeSnackbar } = useSnackbars();
 
     /** State */
