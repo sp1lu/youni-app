@@ -70,11 +70,11 @@ function LoginPage() {
             .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore durante l'autenticazione con Google.`, 'ERROR'))
     }
 
-    const loginWithApple = () => {
-        signInWithApple()
-            .then(() => navigate('/'))
-            .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore durante l'autenticazione con Apple.`, 'ERROR'))
-    }
+    // const loginWithApple = () => {
+    //     signInWithApple()
+    //         .then(() => navigate('/'))
+    //         .catch((err: unknown) => createSnackbar(err instanceof Error ? err.message : `Errore durante l'autenticazione con Apple.`, 'ERROR'))
+    // }
 
     const onInputChange = (event: ChangeEvent): void => {
         const { name, value } = event.target as HTMLInputElement;
@@ -112,10 +112,6 @@ function LoginPage() {
                     <button type='button' className='secondary google-btn' onClick={loginWithGoogle}>
                         <span className='google-icon'></span>
                         Continua con Google
-                    </button>
-                    <button type='button' className='secondary apple-btn' onClick={loginWithApple}>
-                        <span className='apple-icon'></span>
-                        Continua con Apple
                     </button>
                 </div>
 
