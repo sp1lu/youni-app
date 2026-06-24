@@ -92,7 +92,6 @@ function LoginPage() {
                     <img src={`${import.meta.env.VITE_PUBLIC_URL}/images/younilife_logo.svg`} alt='youni life logo' />
                 </div>
                 <div className='login__title'>
-                    <h1 className='title-l'>Entra in Youni Life</h1>
                     <p className='subtitle-s'>Accedi ad eventi e servizi dedicati al mondo universitario</p>
                 </div>
 
