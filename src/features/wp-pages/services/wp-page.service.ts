@@ -13,8 +13,7 @@ export async function getAllWpPages(url: string): Promise<WpPage[]> {
             }
         })
         .then((data: any) => {
-            if (!Array.isArray(data)) throw new Error(`Errore nel recupero dei post.`);
-            console.log(data);                        
+            if (!Array.isArray(data)) throw new Error(`Errore nel recupero dei post.`);                       
             return data.map((d: any) => wpPageConverter(d));
         })
         .catch((err: unknown) => {

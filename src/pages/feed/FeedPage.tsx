@@ -13,7 +13,7 @@ import type { City } from '../../features/users'
 /** Services */
 import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscountCategoryLabel, getEventCategoryLabel } from '../../global/services'
 import { getAllEvents } from '../../features/events'
-import { getAllDiscounts } from '../../features/discounts'
+import { getAllDiscounts, splitDisocuntsByFeatured } from '../../features/discounts'
 import { getAllPosts } from '../../features/posts'
 import { getAllWpPages } from '../../features/wp-pages'
 import { getAllCities } from '../../features/users'
@@ -59,14 +59,17 @@ function FeedPage() {
     useEffect(() => {
         if (!user) return;
         getAllEvents()
-            .then((events: AppEvent[]) => setEvents(events.filter((e) => e.city === user.city)))
+            .then((events: AppEvent[]) => setEvents(events.filter((e) => e.city === user.city).toSorted((a, b) => a.date.getTime() - b.date.getTime())))
             .catch((err: unknown) => console.log(err))
     }, [user]);
 
     useEffect(() => {
         if (!user) return;
         getAllDiscounts()
-            .then((discounts: Discount[]) => setDiscounts(discounts.filter((d) => d.city === user.city)))
+            .then((discounts: Discount[]) => {
+                const { featured, notFeatured } = splitDisocuntsByFeatured(discounts);               
+                setDiscounts([...featured, ...notFeatured].filter((d) => d.city === user.city))
+            })
             .catch((err: unknown) => console.log(err))
     }, [user]);
 
@@ -76,7 +79,7 @@ function FeedPage() {
         if (!city) return;
 
         getAllPosts()
-            .then((posts: Post[]) => setPosts(posts.filter((p) => p.categoryIds.includes(city.categoryId))))
+            .then((posts: Post[]) => setPosts(posts.filter((p) => p.categoryIds.includes(city.categoryId)).toSorted((a, b) => b.date.getTime() - a.date.getTime())))
             .catch((err: unknown) => console.log(err))
     }, [cities, user]);
 
@@ -86,7 +89,7 @@ function FeedPage() {
         if (!city) return;
 
         getAllWpPages(city.url)
-            .then((pages: WpPage[]) => setWpPages((pages.filter((p) => city.pageIds.includes(p.id)))))
+            .then((pages: WpPage[]) => setWpPages((pages.filter((p) => city.pageIds.includes(p.id))).toSorted((a, b) => a.id - b.id)))
             .catch((err: unknown) => console.log(err))
     }, [cities, user]);
 

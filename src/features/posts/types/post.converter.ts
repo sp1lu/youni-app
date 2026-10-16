@@ -3,12 +3,13 @@ import type { Post } from './post.interface'
 
 /** Methods */
 export function postConverter(data: any): Post {
-    if (!('id' in data)) throw new Error(`Campo 'id' mancante nel post`);
+    if (!('id' in data)) throw new Error(`Campo 'id' mancante nel post`);  
 
     return {
         id: `post-${data['id']}`,
         img: searchThumbnailImg(data),
         title: ('title' in data && 'rendered' in data['title']) ? decodeHtml(data['title']['rendered']) : '',
+        date: ('date' in data && typeof data['date'] === 'string' && !isNaN(new Date(data['date']).getTime())) ? new Date(data['date']) : new Date(),
         url: ('link' in data) ? data['link'] : '',
         categoryIds: 'categories' in data && Array.isArray(data['categories']) && data['categories'].every((c) => typeof c === 'number') ? [...data['categories']] : []
     }
