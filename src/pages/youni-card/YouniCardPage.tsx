@@ -74,11 +74,7 @@ function YouniCardPage() {
 
                 <div className='younicard-desc'>
                     <h3>A cosa serve la Youni card?</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent felis lacus, ultrices ornare tempus pellentesque, consequat vitae mauris.
-
-                        Nulla facilisi. Duis vitae euismod elit, quis ultrices leo. Nunc elementum erat ac malesuada posuere. Cras sodales metus at consectetur fringilla. Sed semper mi vitae turpis gravida, et pharetra nibh aliquet.
-
-                        Morbi sed scelerisque lectus. Mauris sed sapien maximus, iaculis odio eu, consequat sapien.</p>
+                    <p>La YouniCard è la carta fedeltà di YouniLife dedicata agli studenti universitari. Permette di ottenere sconti presso locali e attività partner nelle città universitarie e di partecipare agli eventi universitari organizzati da YouniLife.</p>
                 </div>
             </div>
         </div>
