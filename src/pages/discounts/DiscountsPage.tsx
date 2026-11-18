@@ -13,7 +13,7 @@ import type { City } from '../../features/users'
 
 /** Services */
 import { getAllDiscountCategories, getDiscountCategoryLabel } from '../../global/services'
-import { getAllDiscounts } from '../../features/discounts'
+import { getAllDiscounts, splitDiscountsByFeatured } from '../../features/discounts'
 import { getAllCities } from '../../features/users'
 
 /** Components */
@@ -48,15 +48,19 @@ function DiscountsPage() {
     }, [user])
 
     useEffect(() => {
+        if (!user?.city) return;
+
         setIsLoadingDiscounts(true);
         getAllDiscounts()
             .then((discounts: Discount[]) => {
-                setDiscounts(discounts.filter((e) => e.city === user?.city))
-                setFilteredDiscounts(discounts.filter((e) => e.city === user?.city))
+                const { featured, notFeatured } = splitDiscountsByFeatured(discounts);
+                const cityDiscounts = [...featured, ...notFeatured].filter((discount) => discount.city === user.city);
+                setDiscounts(cityDiscounts);
+                setFilteredDiscounts(cityDiscounts);
             })
             .catch((err: unknown) => console.log(err))
             .finally(() => setIsLoadingDiscounts(false))
-    }, [])
+    }, [user?.city])
 
     useEffect(() => {
         getAllDiscountCategories()

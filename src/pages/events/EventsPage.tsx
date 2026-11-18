@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'r
 
 /** Services */
 import { formatDate, getAllEventCategories, getEventCategoryLabel } from '../../global/services'
-import { getAllEvents } from '../../features/events'
+import { getAllEvents, splitEventsByFeatured } from '../../features/events'
 import { getAllCities } from '../../features/users'
 
 /** Contexts */
@@ -52,8 +52,15 @@ function EventsPage() {
         setIsLoadingEvents(true);
         getAllEvents()
             .then((events: AppEvent[]) => {
-                setEvents(events.filter((e) => e.city === user?.city))
-                setFilteredEvents(events.filter((e) => e.city === user?.city))
+                // setEvents(events.filter((e) => e.city === user?.city))
+                // setFilteredEvents(events.filter((e) => e.city === user?.city))
+                const { featured, notFeatured } = splitEventsByFeatured(events);
+                const cityEvents = [
+                    ...featured.toSorted((a, b) => a.date.getTime() - b.date.getTime()),
+                    ...notFeatured.toSorted((a, b) => a.date.getTime() - b.date.getTime())
+                ].filter((event) => event.city === user?.city);
+                setEvents(cityEvents);
+                setFilteredEvents(cityEvents);
             })
             .catch((err: unknown) => console.log(err))
             .finally(() => setIsLoadingEvents(false));

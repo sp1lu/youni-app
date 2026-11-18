@@ -12,8 +12,8 @@ import type { City } from '../../features/users'
 
 /** Services */
 import { formatDate, getAllDiscountCategories, getAllEventCategories, getDiscountCategoryLabel, getEventCategoryLabel } from '../../global/services'
-import { getAllEvents } from '../../features/events'
-import { getAllDiscounts, splitDisocuntsByFeatured } from '../../features/discounts'
+import { getAllEvents, splitEventsByFeatured } from '../../features/events'
+import { getAllDiscounts, splitDiscountsByFeatured } from '../../features/discounts'
 import { getAllPosts } from '../../features/posts'
 import { getAllWpPages } from '../../features/wp-pages'
 import { getAllCities } from '../../features/users'
@@ -59,7 +59,15 @@ function FeedPage() {
     useEffect(() => {
         if (!user) return;
         getAllEvents()
-            .then((events: AppEvent[]) => setEvents(events.filter((e) => e.city === user.city).toSorted((a, b) => a.date.getTime() - b.date.getTime())))
+            .then((events: AppEvent[]) => {
+                const { featured, notFeatured } = splitEventsByFeatured(events);
+                setEvents(
+                    [
+                        ...featured.toSorted((a, b) => a.date.getTime() - b.date.getTime()),
+                        ...notFeatured.toSorted((a, b) => a.date.getTime() - b.date.getTime())
+                    ]
+                        .filter((d) => d.city === user.city))
+            })
             .catch((err: unknown) => console.log(err))
     }, [user]);
 
@@ -67,7 +75,7 @@ function FeedPage() {
         if (!user) return;
         getAllDiscounts()
             .then((discounts: Discount[]) => {
-                const { featured, notFeatured } = splitDisocuntsByFeatured(discounts);               
+                const { featured, notFeatured } = splitDiscountsByFeatured(discounts);
                 setDiscounts([...featured, ...notFeatured].filter((d) => d.city === user.city))
             })
             .catch((err: unknown) => console.log(err))
